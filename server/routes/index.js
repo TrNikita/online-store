@@ -1,8 +1,6 @@
-const Router = require('express');
-const router = new Router();
+const express = require('express');
+const router = express.Router({mergeParams: true});
 
-const productRouter = require('./productRouter');
-
-router.use('/products', productRouter);
+router.use('/product', require('./product.routes'));
 
 module.exports = router;
