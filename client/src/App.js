@@ -8,7 +8,7 @@ function App() {
     // return <></>;
     return (
         <>
-            <NavBar/>
+            <NavBar />
             {elements}
             {/* <div className='App'> */}
             {/*     <header className='App-header'> */}

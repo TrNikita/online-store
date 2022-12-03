@@ -1,0 +1,9 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+/.eslintrc.js
+/package.json
+/package-lock.json
+

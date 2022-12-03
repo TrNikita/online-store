@@ -8,15 +8,16 @@ router.patch('/:userId', auth, async (req, res) => {
         const {userId} = req.params;
 
         if (userId === req.user._id) {
-            const updatedUser = await User.findByIdAndUpdate(userId, req.body, {new: true});
+            const updatedUser = await User.findByIdAndUpdate(userId, req.body, {
+                new: true,
+            });
             res.send(updatedUser);
         } else {
             res.status(401).json({message: 'Unauthorized'});
         }
-
     } catch (e) {
         res.status(500).json({
-            'message': 'На сервере произошла ошибка. Попробуйте позже',
+            message: 'На сервере произошла ошибка. Попробуйте позже',
         });
     }
 });
@@ -27,7 +28,7 @@ router.get('/', auth, async (req, res) => {
         res.status(200).send(list);
     } catch (e) {
         res.status(500).json({
-            'message': 'На сервере произошла ошибка. Попробуйте позже',
+            message: 'На сервере произошла ошибка. Попробуйте позже',
         });
     }
 });

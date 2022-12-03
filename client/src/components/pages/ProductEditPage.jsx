@@ -7,11 +7,7 @@ const ProductEditPage = () => {
 
     console.log('productId', productId);
     console.log('location', location);
-    return (
-        <div>
-            Edit
-        </div>
-    );
+    return <div>Edit</div>;
 };
 
 export default ProductEditPage;

@@ -2,8 +2,8 @@ const products = [
     {
         _id: 1,
         title: 'Iphone 13',
-        brand: 'Apple',
         category: 'telephone',
+        brand: 'Apple',
         year: 2022,
         prevPrice: '',
         price: 999,
@@ -17,8 +17,8 @@ const products = [
     {
         _id: 2,
         title: 'Galaxy note',
-        brand: 'Samsung',
         category: 'telephone',
+        brand: 'Samsung',
         year: 2021,
         prevPrice: '',
         price: 999,
@@ -32,8 +32,8 @@ const products = [
     {
         _id: 3,
         title: 'macbook',
-        brand: 'Apple',
         category: 'notebook',
+        brand: 'Apple',
         year: 2020,
         prevPrice: 1500,
         price: 999,
@@ -47,8 +47,8 @@ const products = [
     {
         _id: 4,
         title: 'matebook',
-        brand: 'Huawei',
         category: 'notebook',
+        brand: 'Huawei',
         year: 2019,
         prevPrice: 1230,
         price: 999,

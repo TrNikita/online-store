@@ -1,9 +1,7 @@
-const {
-    Schema,
-    model,
-} = require('mongoose');
+const {Schema, model} = require('mongoose');
 
-const schema = new Schema({
+const schema = new Schema(
+    {
         name: {type: String},
         email: {
             type: String,
@@ -12,14 +10,11 @@ const schema = new Schema({
         },
         password: {type: String},
         image: String,
-        rate: Number,
-        sex: {
-            type: String,
-            enum: ['male', 'female', 'other'],
-        },
+        role: {type: String, default: 'USER'},
     },
     {
         timestamps: {createdAt: 'created_at'},
-    });
+    },
+);
 
 module.exports = model('User', schema);

@@ -1,19 +1,21 @@
-const {
-    Schema,
-    model,
-} = require('mongoose');
+const {Schema, model} = require('mongoose');
 
-const schema = new Schema({
+const schema = new Schema(
+    {
         title: {
             type: String,
             required: true,
         },
         brand: {
+            // todo return to Brand
+            // type: Schema.Types.ObjectId,
+            // ref: 'Brand',
             type: String,
             required: true,
         },
         category: {
-            type: String,
+            type: Schema.Types.ObjectId,
+            ref: 'Category',
         },
         year: {
             type: String,
@@ -26,22 +28,24 @@ const schema = new Schema({
             required: true,
         },
         rate: {
-            type: Number,
+            type: Schema.Types.ObjectId,
+            ref: 'Rate',
         },
-        isFavourite: {
-            type: Boolean,
+        Favourite: {
+            type: Schema.Types.ObjectId,
+            ref: 'Favourite',
         },
         tags: {
             type: String,
+            default: 'New',
         },
         promotion: {
             type: String,
+            default: 'Акции',
         },
         description: {
             type: String,
-        },
-        configuration: {
-            type: String,
+            default: 'Описание',
         },
         image: {
             type: String,
@@ -49,6 +53,7 @@ const schema = new Schema({
     },
     {
         timestamps: {createdAt: 'created_at'},
-    });
+    },
+);
 
 module.exports = model('Product', schema);

@@ -3,10 +3,10 @@ const config = require('config');
 const Token = require('../models/Token');
 
 class TokenService {
-// return accessToken, refreshToken, expiresIn
+    // return accessToken, refreshToken, expiresIn
     generate(payload) {
         const accessToken = jwt.sign(payload, config.get('accessSecret'), {
-            expiresIn: '1h',
+            expiresIn: '24h',
         });
         const refreshToken = jwt.sign(payload, config.get('refreshSecret'));
         return {

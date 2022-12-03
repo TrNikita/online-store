@@ -1,20 +1,19 @@
 // 1. У любого пользователя будет как минимум в БД qualities & professions
 // 2. Они равны mock данным
 
-const Product = require('../models/Product');
-const productMock = require('../mock/products.json');
+const Brand = require('../models/Brand');
+const brandMock = require('../mock/brands.json');
 
 module.exports = async () => {
-    const products = await Product.find();
-    if (products.length !== productMock.length) {
-        await createInitialEntity(Product, productMock);
-    }
+    const brands = await Brand.find();
+    if (brands.length !== brandMock.length)
+        await createInitialEntity(Brand, brandMock);
 };
 
 async function createInitialEntity(Model, data) {
     await Model.collection.drop();
     return Promise.all(
-        data.map(async item => {
+        data.map(async (item) => {
             try {
                 delete item._id;
                 const newItem = new Model(item);

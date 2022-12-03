@@ -1,12 +1,7 @@
 const {Schema, model} = require('mongoose');
-
 const schema = new Schema(
     {
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-        },
-        refreshToken: {
+        name: {
             type: String,
             required: true,
         },
@@ -16,4 +11,4 @@ const schema = new Schema(
     },
 );
 
-module.exports = model('Token', schema);
+module.exports = model('Category', schema);

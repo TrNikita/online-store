@@ -5,19 +5,17 @@ const router = express.Router({mergeParams: true});
 
 // api/comment
 
-router.route('/')
+router
+    .route('/')
     .get(auth, async (req, res) => {
         try {
-            const {
-                orderBy,
-                equalTo,
-            } = req.query;
+            const {orderBy, equalTo} = req.query;
 
             const list = await Comment.find({[orderBy]: equalTo});
             res.send(list);
         } catch (e) {
             res.status(500).json({
-                'message': 'На сервере произошла ошибка. Попробуйте позже',
+                message: 'На сервере произошла ошибка. Попробуйте позже',
             });
         }
     })
@@ -32,7 +30,7 @@ router.route('/')
             res.status(201).send(newComment);
         } catch (e) {
             res.status(500).json({
-                'message': e.message,
+                message: e.message,
             });
         }
     });
@@ -51,7 +49,7 @@ router.delete('/:commentId', auth, async (req, res) => {
         }
     } catch (e) {
         res.status(500).json({
-            'message': 'На сервере произошла ошибка. Попробуйте позже',
+            message: 'На сервере произошла ошибка. Попробуйте позже',
         });
     }
 });
