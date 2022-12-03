@@ -13,7 +13,7 @@ const schema = new Schema({
         required: true,
     },
 }, {
-    timestamps: {createdAt: 'created_at'},
+    timestamps: true,
 });
 
 module.exports = model('Token', schema);
