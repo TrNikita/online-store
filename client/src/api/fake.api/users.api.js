@@ -3,29 +3,25 @@ const users = [
         _id: 1,
         name: 'Джон Дориан',
         email: 'Jony7351@tw.com',
-        sex: 'male',
-        tel: '88005553535',
+        role: 'ADMIN',
     },
     {
         _id: 2,
         name: 'Брэд Питт',
         email: 'superstar@star.com',
-        sex: 'male',
-        tel: '88005553535',
+        role: 'USER',
     },
     {
         _id: 3,
         name: 'Джоуи Триббиани',
         email: 'joe@trib.com',
-        sex: 'male',
-        tel: '88005553535',
+        role: 'USER',
     },
     {
         _id: 4,
         name: 'Моника Геллер',
         email: 'mono@super.com',
-        sex: 'female',
-        tel: '88005553535',
+        role: 'USER',
     },
 ];
 

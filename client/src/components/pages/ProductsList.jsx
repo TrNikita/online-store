@@ -9,7 +9,7 @@ const ProductsList = () => {
         dispatch(loadProductsList());
     }, []);
     const products = useSelector(getProducts());
-    console.log('products', products);
+
     if (products)
         return (
             <div className='flex flex-wrap justify-center'>

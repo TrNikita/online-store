@@ -1,14 +1,14 @@
 import React from 'react';
-import {Link, useLocation, useNavigate, useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 
 const ProductPage = () => {
-    const navigate = useNavigate();
-    console.log('navigate', navigate);
+    // const navigate = useNavigate();
+    // console.log('navigate', navigate);
     const {productId} = useParams();
-    const location = useLocation();
+    // const location = useLocation();
 
-    console.log('productId', productId);
-    console.log('location', location);
+    // console.log('productId', productId);
+    // console.log('location', location);
     return (
         <>
             <div>{productId}</div>
