@@ -2,7 +2,7 @@ import React from 'react';
 
 const Search = () => {
     return (
-        <div className='form-control m-1'>
+        <div className='form-control mx-auto'>
             <input
                 type='text'
                 placeholder='Поиск'

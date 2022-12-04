@@ -12,6 +12,16 @@ const routes = [
         element: <HomePage />,
     },
     {
+        path: ':categoryId',
+        element: <ProductsList />,
+        children: [
+            {
+                path: '*',
+                element: <Navigate to='products/:productId' />,
+            },
+        ],
+    },
+    {
         path: 'products',
         element: <ProductsLayout />,
         children: [

@@ -5,6 +5,10 @@ const schema = new Schema(
             type: String,
             required: true,
         },
+        path: {
+            type: String,
+            required: true,
+        },
     },
     {
         timestamps: {createdAt: 'created_at'},

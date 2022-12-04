@@ -5,7 +5,6 @@ import NavBar from './components/ui/NavBar';
 
 function App() {
     const elements = useRoutes(routes);
-    // return <></>;
     return (
         <>
             <NavBar />

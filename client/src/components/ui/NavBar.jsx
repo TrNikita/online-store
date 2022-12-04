@@ -8,14 +8,19 @@ import Basket from './NavBar/Basket';
 import Search from './NavBar/Search';
 import Menu from './NavBar/Menu';
 import Breadcrumbs from './Breadcrumbs';
+import HeaderNavigation from './HeaderNavigation';
+import {getCategory, loadCategoryList} from '../../store/categorySlice';
 
 const Navbar = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(loadUsersList());
+        dispatch(loadCategoryList());
     }, []);
 
     const user = useSelector(getUserById(2));
+    const category = useSelector(getCategory());
+
     return (
         <>
             <Breadcrumbs user={user} />
@@ -36,6 +41,7 @@ const Navbar = () => {
                     <LoginButton />
                 )}
             </div>
+            <HeaderNavigation category={category} />
         </>
     );
 };
