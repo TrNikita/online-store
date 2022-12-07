@@ -2,9 +2,9 @@ import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserById, loadUsersList} from '../../store/usersSlice';
-import Avatar from './NavBar/Avatar';
-import LoginButton from './NavBar/LoginButton';
-import Basket from './NavBar/Basket';
+// import Avatar from './NavBar/Avatar';
+// import LoginButton from './NavBar/LoginButton';
+// import Basket from './NavBar/Basket';
 import Search from './NavBar/Search';
 import Menu from './NavBar/Menu';
 import Breadcrumbs from './Breadcrumbs';
@@ -24,7 +24,7 @@ const Navbar = () => {
     return (
         <>
             <Breadcrumbs user={user} />
-            <div className='navbar bg-base-100 border-2'>
+            <div className='navbar bg-base-100'>
                 <Menu />
                 <div className='flex-1'>
                     <Link to='/' className='btn btn-ghost normal-case text-xl'>
@@ -32,14 +32,16 @@ const Navbar = () => {
                     </Link>
                 </div>
                 <Search />
-                {user ? (
-                    <>
-                        <Basket />
-                        <Avatar />
-                    </>
-                ) : (
-                    <LoginButton />
-                )}
+                {/* {user ? ( */}
+                {/*     <> */}
+                {/*         <Basket /> */}
+                {/*         <Avatar /> */}
+                {/*     </> */}
+                {/* ) : ( */}
+                <Link to='login' className='btn'>
+                    Войти
+                </Link>
+                {/* // )} */}
             </div>
             <HeaderNavigation category={category} />
         </>

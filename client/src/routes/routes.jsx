@@ -5,12 +5,28 @@ import ProductsList from '../components/pages/ProductsList';
 import ProductsLayout from '../layouts/productsLayout';
 import ProductPage from '../components/pages/ProductPage';
 import ProductEditPage from '../components/pages/ProductEditPage';
+import Login from '../layouts/login';
+import RegisterForm from '../components/ui/registerForm';
 
 const routes = [
     {
         path: '',
         element: <HomePage />,
     },
+    {
+        path: 'login',
+        element: <Login />,
+        children: [
+            {
+                path: 'register',
+                element: <RegisterForm />,
+            },
+        ],
+    },
+    // {
+    //     path: 'register',
+    //     element: <Login />,
+    // },
     {
         path: ':categoryId',
         element: <ProductsList />,
