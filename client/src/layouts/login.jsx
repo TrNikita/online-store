@@ -19,7 +19,7 @@ const Login = () => {
             <div className='p-4 flex-1 justify-center'>
                 {formType === 'register' ? (
                     <>
-                        <h3 className='mb-4'>Registr</h3>
+                        <h3 className='mb-4'>Register</h3>
                         {/* <RegisterForm /> */}
                         <p>
                             Already have account?{' '}
@@ -32,13 +32,14 @@ const Login = () => {
                 ) : (
                     <>
                         <LoginForm />
-                        <div className='hero-content lg:flex-row-reverse p-0'>
-                            <div className='hero card w-full max-w-sm shadow-2xl bg-base-100'>
-                                <div className='p-2'>
-                                    <a role='button' onClick={toggleFormType}>
-                                        <p >Зарегистрироваться</p>
-                                    </a>
-                                </div>
+                        <div className='hero-content lg:flex-row-reverse p-2'>
+                            <div className='btn btn-outline hero card w-full max-w-sm shadow-2xl bg-base-100'>
+                                <button
+                                    className='p-2'
+                                    onClick={toggleFormType}
+                                >
+                                    Зарегистрироваться
+                                </button>
                             </div>
                         </div>
                     </>
