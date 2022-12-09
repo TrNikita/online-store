@@ -15,7 +15,7 @@ const TextField = ({label, type, name, value, onChange, error}) => {
     };
     return (
         <div className='card flex-shrink-0 w-full max-w-sm bg-base-100'>
-            <div className='card-body w-96 max-w-xl px-4 py-6'>
+            <div className='card-body w-96 max-w-xl px-4 py-4'>
                 <div className='form-control w-screen flex-row'>
                     <input
                         type={showPassword ? 'text' : type}

@@ -1,7 +1,11 @@
 import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {getUserById, loadUsersList} from '../../store/usersSlice';
+import {
+    getIsLoggedIn,
+    getUsersList,
+    loadUsersList,
+} from '../../store/usersSlice';
 // import Avatar from './NavBar/Avatar';
 // import LoginButton from './NavBar/LoginButton';
 // import Basket from './NavBar/Basket';
@@ -18,12 +22,15 @@ const Navbar = () => {
         dispatch(loadCategoryList());
     }, []);
 
-    const user = useSelector(getUserById(2));
+    const users = useSelector(getUsersList());
     const category = useSelector(getCategory());
+    const isLoggedIn = useSelector(getIsLoggedIn());
 
+    console.log('isLoggedIn', isLoggedIn);
+    console.log('users', users);
     return (
         <>
-            <Breadcrumbs user={user} />
+            <Breadcrumbs />
             <div className='navbar bg-base-100'>
                 <Menu />
                 <div className='flex-1'>

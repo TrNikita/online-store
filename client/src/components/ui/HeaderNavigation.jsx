@@ -6,7 +6,7 @@ const HeaderNavigation = ({category}) => {
     // console.log('category', category);
 
     return (
-        <footer className='bg-neutral-content/25 text-neutral flex flex-row justify-between px-24'>
+        <footer className='bg-neutral-content/25 text-neutral flex flex-row justify-between px-24 shadow'>
             {category ? (
                 <>
                     {category.map((c) => (

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useParams} from 'react-router-dom';
 import LoginForm from '../components/ui/loginForm';
+import RegisterForm from '../components/ui/registerForm';
 
 const Login = () => {
     const {type} = useParams();
@@ -17,33 +18,20 @@ const Login = () => {
     return (
         <div>
             <div className='p-4 flex-1 justify-center'>
-                {formType === 'register' ? (
-                    <>
-                        <h3 className='mb-4'>Register</h3>
-                        {/* <RegisterForm /> */}
-                        <p>
-                            Already have account?{' '}
-                            <a role='button' onClick={toggleFormType}>
-                                {' '}
-                                Sign In
-                            </a>
-                        </p>
-                    </>
-                ) : (
-                    <>
-                        <LoginForm />
-                        <div className='hero-content lg:flex-row-reverse p-2'>
-                            <div className='btn btn-outline hero card w-full max-w-sm shadow-2xl bg-base-100'>
-                                <button
-                                    className='p-2'
-                                    onClick={toggleFormType}
-                                >
-                                    Зарегистрироваться
-                                </button>
-                            </div>
-                        </div>
-                    </>
-                )}
+                {formType === 'register' ? <RegisterForm /> : <LoginForm />}
+
+                <div className='hero-content lg:flex-row-reverse p-2'>
+                    <button
+                        className='p-2 btn btn-outline hero card w-full max-w-sm shadow-2xl bg-base-100 italic
+                        hover:transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:duration-300
+                        '
+                        onClick={toggleFormType}
+                    >
+                        {formType === 'register'
+                            ? 'Есть аккаунт? Войти'
+                            : 'Нет аккаунта? Зарегистрироваться'}
+                    </button>
+                </div>
             </div>
         </div>
     );

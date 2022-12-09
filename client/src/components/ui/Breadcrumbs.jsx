@@ -11,7 +11,6 @@ const Breadcrumbs = () => {
         dispatch(loadProductsList());
     }, []);
     const products = useSelector(getProducts());
-
     const category = useSelector(getCategory());
 
     console.log('category', category);
@@ -19,12 +18,9 @@ const Breadcrumbs = () => {
     const pathArr = pathname.split('/').slice(1);
 
     const namesOfPath = [
-        {
-            products: 'Продукты',
-        },
-        {
-            edit: 'Редактирование',
-        },
+        {products: 'Продукты'},
+        {edit: 'Редактирование'},
+        {login: 'Войти'},
     ];
 
     const pathWithNames = pathArr.map((path) => {
