@@ -1,24 +1,23 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import {removeUser} from '../../../store/usersSlice';
+import {removeUser, updateUser} from '../../../store/usersSlice';
 import {useDispatch} from 'react-redux';
 
 const UserTable = ({user, index}) => {
     console.log('user', user);
 
     const dispatch = useDispatch();
-    const [data, setData] = useState({});
+    const [data, setData] = useState(user);
 
     const handleDeleteUser = (user) => {
         dispatch(removeUser(user._id));
     };
 
-    const handleUpdateUser = (user) => {
-        console.log('user', user);
+    const handleUpdateUser = () => {
+        dispatch(updateUser(data));
     };
 
     const handleChange = ({target}) => {
-        console.log('target', target);
         setData((prevState) => ({
             ...prevState,
             [target.name]: target.value,
@@ -33,7 +32,7 @@ const UserTable = ({user, index}) => {
                 <input
                     type='text'
                     className='input w-full max-w-xs'
-                    value={user.name}
+                    value={data.name || user.name}
                     name='name'
                     onChange={handleChange}
                 />
@@ -63,7 +62,7 @@ const UserTable = ({user, index}) => {
 
 UserTable.propTypes = {
     user: PropTypes.object,
-    index: PropTypes.string,
+    index: PropTypes.number,
 };
 
 export default UserTable;
