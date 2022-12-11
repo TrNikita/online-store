@@ -9,9 +9,9 @@ import Login from '../layouts/login';
 import RegisterForm from '../components/ui/registerForm';
 import LogOut from '../layouts/logOut';
 import AdminPanel from '../layouts/adminPanel';
-import UsersList from '../components/ui/adminPanel/usersList';
-import CategoriesList from '../components/ui/adminPanel/categoriesList';
-import ProductsListAdmin from '../components/ui/adminPanel/productsListAdmin';
+import UsersList from '../components/ui/AdminPanel/usersList';
+import CategoriesList from '../components/ui/AdminPanel/categoriesList';
+import ProductsListAdmin from '../components/ui/AdminPanel/productsListAdmin';
 
 const routes = [
     {
@@ -29,7 +29,7 @@ const routes = [
         ],
     },
     {
-        path: 'adminPanel',
+        path: 'AdminPanel',
         element: <AdminPanel />,
         children: [
             {
