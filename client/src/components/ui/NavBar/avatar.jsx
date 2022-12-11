@@ -1,27 +1,25 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {getUserById, loadUsersList} from '../../../store/usersSlice';
+import React, {memo} from 'react';
+import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
-const Avatar = () => {
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(loadUsersList());
-    }, []);
-    const user = useSelector(getUserById(2));
-
+const Avatar = memo(({user}) => {
     const userNameArr = user.name.split(' ');
     const letters =
         userNameArr.length === 2
             ? userNameArr[0][0] + userNameArr[1][0]
             : userNameArr[0][0];
 
+    const getAvatarClasses = () => {
+        return (
+            'btn bg-neutral-focus text-neutral-content rounded-full w-12' +
+            (user.role === 'ADMIN' ? ' ring ring-red-600 ring-offset-2' : '')
+        );
+    };
+
     return (
         <div className='dropdown dropdown-end'>
             <div className='avatar placeholder'>
-                <label
-                    tabIndex={0}
-                    className=' btn bg-neutral-focus text-neutral-content rounded-full w-12'
-                >
+                <label tabIndex={0} className={getAvatarClasses()}>
                     <span className='text-xl'>{letters}</span>
                 </label>
             </div>
@@ -37,14 +35,20 @@ const Avatar = () => {
                     </a>
                 </li>
                 <li>
-                    <a>Settings</a>
+                    <Link to='logout'>Logout</Link>
                 </li>
-                <li>
-                    <a>Logout</a>
-                </li>
+                {user.role === 'ADMIN' ? (
+                    <li>
+                        <Link to='adminpanel'>Панель администратора</Link>
+                    </li>
+                ) : null}
             </ul>
         </div>
     );
+});
+
+Avatar.propTypes = {
+    user: PropTypes.object,
 };
 
 export default Avatar;

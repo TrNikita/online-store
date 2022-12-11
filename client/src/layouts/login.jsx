@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {memo, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import LoginForm from '../components/ui/loginForm';
 import RegisterForm from '../components/ui/registerForm';
 
-const Login = () => {
+const Login = memo(() => {
     const {type} = useParams();
     const [formType, setFormType] = useState(
         type === 'register' ? type : 'login',
@@ -35,6 +35,6 @@ const Login = () => {
             </div>
         </div>
     );
-};
+});
 
 export default Login;

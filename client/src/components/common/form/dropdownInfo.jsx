@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 
-const DropdownInfo = ({text}) => {
+const DropdownInfo = memo(({text}) => {
     return (
         <div className='dropdown dropdown-end'>
             <label
@@ -32,7 +32,7 @@ const DropdownInfo = ({text}) => {
             </div>
         </div>
     );
-};
+});
 
 DropdownInfo.propTypes = {
     text: PropTypes.string.isRequired,

@@ -1,18 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {validator} from '../../utils/validator';
-import {useNavigate} from 'react-router-dom';
 import TextField from '../common/form/textField';
-import {useDispatch} from 'react-redux';
-import {login} from '../../store/usersSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {getAuthErrors, login} from '../../store/usersSlice';
 
 const LoginForm = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
     const [data, setData] = useState({
         email: '',
         password: '',
     });
+
+    const dispatch = useDispatch();
+    const loginError = useSelector(getAuthErrors());
 
     const [errors, setErrors] = useState({});
 
@@ -58,9 +57,7 @@ const LoginForm = () => {
         e.preventDefault();
         const isValid = validate();
         if (!isValid) return;
-        console.log('data', data);
         dispatch(login({payload: data}));
-        navigate(-1);
     };
 
     return (
@@ -87,11 +84,16 @@ const LoginForm = () => {
                             value={data.password}
                             error={errors.password}
                         />
+                        {loginError && (
+                            <p className='px-4 text-red-500 text-xs italic'>
+                                {loginError}
+                            </p>
+                        )}
                         <button
                             className='btn btn-primary card'
                             disabled={!isValid}
                         >
-                            Login
+                            Подтвердить
                         </button>
                     </div>
                 </div>

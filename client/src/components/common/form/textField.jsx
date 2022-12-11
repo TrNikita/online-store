@@ -70,6 +70,7 @@ const TextField = ({label, type, name, value, onChange, error}) => {
         </div>
     );
 };
+
 TextField.defaultProps = {
     type: 'text',
 };

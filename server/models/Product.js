@@ -52,7 +52,7 @@ const schema = new Schema(
         },
     },
     {
-        timestamps: {createdAt: 'created_at'},
+        timestamps: true,
     },
 );
 

@@ -1,12 +1,17 @@
 import React from 'react';
 import {Navigate} from 'react-router-dom';
-import HomePage from '../components/pages/HomePage';
-import ProductsList from '../components/pages/ProductsList';
+import HomePage from '../components/pages/homePage';
+import ProductsList from '../components/pages/productsList';
 import ProductsLayout from '../layouts/productsLayout';
-import ProductPage from '../components/pages/ProductPage';
-import ProductEditPage from '../components/pages/ProductEditPage';
+import ProductPage from '../components/pages/productPage';
+import ProductEditPage from '../components/pages/productEditPage';
 import Login from '../layouts/login';
 import RegisterForm from '../components/ui/registerForm';
+import LogOut from '../layouts/logOut';
+import AdminPanel from '../layouts/adminPanel';
+import UsersList from '../components/ui/adminPanel/usersList';
+import CategoriesList from '../components/ui/adminPanel/categoriesList';
+import ProductsListAdmin from '../components/ui/adminPanel/productsListAdmin';
 
 const routes = [
     {
@@ -18,15 +23,39 @@ const routes = [
         element: <Login />,
         children: [
             {
-                path: 'register',
+                path: ':admin',
                 element: <RegisterForm />,
             },
         ],
     },
-    // {
-    //     path: 'register',
-    //     element: <Login />,
-    // },
+    {
+        path: 'adminPanel',
+        element: <AdminPanel />,
+        children: [
+            {
+                path: 'users',
+                element: <UsersList />,
+            },
+            {
+                path: 'categories',
+                element: <CategoriesList />,
+            },
+            {
+                path: 'products',
+                element: <ProductsListAdmin />,
+            },
+        ],
+    },
+    {
+        path: 'logout',
+        element: <LogOut />,
+        children: [
+            {
+                path: '',
+                element: <Navigate to='/' />,
+            },
+        ],
+    },
     {
         path: ':categoryId',
         element: <ProductsList />,

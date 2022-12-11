@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {validator} from '../../utils/validator';
-import {useNavigate} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import TextField from '../common/form/textField';
 import CheckBoxField from '../common/form/checkBoxField';
 import DropdownInfo from '../common/form/dropdownInfo';
@@ -9,12 +9,15 @@ import {signUp} from '../../store/usersSlice';
 
 const RegisterForm = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const params = useParams();
+    console.log('params', params.admin);
 
     const [data, setData] = useState({
         email: '',
         name: '',
         password: '',
+        // role: '',
+        adminPassword: '',
         licence: false,
     });
 
@@ -81,9 +84,9 @@ const RegisterForm = () => {
         e.preventDefault();
         const isValid = validate();
         if (!isValid) return;
+        if (params.admin) data.role = 'ADMIN';
         console.log('data', data);
         dispatch(signUp(data));
-        navigate(-1);
     };
 
     return (
@@ -120,6 +123,15 @@ const RegisterForm = () => {
                             value={data.password}
                             error={errors.password}
                         />
+                        {params.admin ? (
+                            <TextField
+                                label='Пароль админа'
+                                type='password'
+                                name='adminPassword'
+                                onChange={handleChange}
+                                value={data.adminPassword}
+                            />
+                        ) : null}
                         <CheckBoxField
                             value={data.licence}
                             onChange={handleChange}
@@ -133,7 +145,7 @@ const RegisterForm = () => {
                             className='btn btn-primary card'
                             disabled={!isValid}
                         >
-                            Register
+                            Подтвердить
                         </button>
                     </div>
                 </div>

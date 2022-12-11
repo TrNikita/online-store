@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const config = require('config');
 const {check, validationResult} = require('express-validator');
 const User = require('../models/User');
 const {generateUserData} = require('../utils/helpers');
@@ -28,7 +29,7 @@ router.post('/signUp', [
                     },
                 });
 
-            const {email, password} = req.body;
+            const {email, password, role, adminPassword} = req.body;
             const existingUser = await User.findOne({email});
             // проверка на наличие юзера
             if (existingUser)
@@ -38,6 +39,18 @@ router.post('/signUp', [
                         code: 400,
                     },
                 });
+
+            if (
+                role === 'ADMIN' &&
+                adminPassword !== config.get('adminSecretKey')
+            ) {
+                return res.status(400).json({
+                    error: {
+                        message: 'admin password incorrect',
+                        code: 400,
+                    },
+                });
+            }
 
             const hashedPassword = await bcrypt.hash(password, 12);
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import routes from './routes/routes';
 import {useRoutes} from 'react-router-dom';
-import NavBar from './components/ui/NavBar';
+import NavBar from './components/ui/navBar';
 
 function App() {
     const elements = useRoutes(routes);

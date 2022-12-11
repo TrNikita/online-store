@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getProducts, loadProductsList} from '../../store/productsSlice';
 import {useParams} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import ProductCard from '../ui/ProductCard';
+import ProductCard from '../ui/productCard';
 
 const ProductsList = () => {
     const params = useParams();

@@ -3,6 +3,7 @@ import localStorageService from '../services/localStorage.service';
 import authService from '../services/auth.service';
 import {generateAuthError} from '../utils/generateAuthError';
 import userService from '../services/user.service';
+import history from '../utils/history';
 
 const initialState = localStorageService.getAccessToken()
     ? {
@@ -62,6 +63,15 @@ const usersSlice = createSlice({
         authRequested: (state) => {
             state.error = null;
         },
+        userRemovedFailed: (state, action) => {
+            state.error = action.payload;
+        },
+        userRemovedSuccess: (state, action) => {
+            const index = state.entities.findIndex(
+                (u) => u._id === action.payload,
+            );
+            state.entities.splice(index, 1);
+        },
     },
 });
 
@@ -75,11 +85,14 @@ const {
     authRequestSuccess,
     userLoggedOut,
     userUpdateSuccessed,
+    userRemovedFailed,
+    userRemovedSuccess,
 } = actions;
 
 const authRequested = createAction('users/authRequested');
 const userUpdateFailed = createAction('users/userUpdateFailed');
 const userUpdateRequested = createAction('users/userUpdateRequested');
+const userRemoveRequested = createAction('users/userRemoveRequested');
 
 export const login =
     ({payload}) =>
@@ -91,6 +104,7 @@ export const login =
             console.log('data', data);
             localStorageService.setTokens(data);
             dispatch(authRequestSuccess({userId: data.userId}));
+            history.go(-1);
         } catch (error) {
             const {code, message} = error.response.data.error;
             if (code === 400) {
@@ -108,7 +122,7 @@ export const signUp = (payload) => async (dispatch) => {
         const data = await authService.register(payload);
         localStorageService.setTokens(data);
         dispatch(authRequestSuccess({userId: data.userId}));
-        history.push('/users');
+        history.go(-1);
     } catch (error) {
         dispatch(authRequestFailed(error.message));
     }
@@ -140,12 +154,25 @@ export const updateUser = (payload) => async (dispatch) => {
     }
 };
 
+export const removeUser = (payload) => async (dispatch) => {
+    dispatch(userRemoveRequested());
+    try {
+        console.log('payload', payload);
+        await userService.remove(payload);
+        dispatch(userRemovedSuccess(payload));
+    } catch (e) {
+        dispatch(userRemovedFailed(e.message));
+    }
+};
+
 export const getUsersList = () => (state) => state.users.entities;
+
 export const getCurrentUserData = () => (state) => {
     return state.users.entities
         ? state.users.entities.find((u) => u._id === state.users.auth.userId)
         : null;
 };
+
 export const getUserById = (userId) => (state) => {
     if (state.users.entities)
         return state.users.entities.find((u) => u._id === userId);

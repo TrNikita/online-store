@@ -22,7 +22,7 @@ const schema = new Schema(
         // todo Rate
     },
     {
-        timestamps: {createdAt: 'created_at'},
+        timestamps: true,
     },
 );
 

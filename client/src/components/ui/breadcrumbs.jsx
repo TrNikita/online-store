@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {Link, useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {getProducts, loadProductsList} from '../../store/productsSlice';
-import {getCategory} from '../../store/categorySlice';
+// import {getCategory} from '../../store/categorySlice';
 
 const Breadcrumbs = () => {
     const {pathname} = useLocation();
@@ -11,9 +11,7 @@ const Breadcrumbs = () => {
         dispatch(loadProductsList());
     }, []);
     const products = useSelector(getProducts());
-    const category = useSelector(getCategory());
-
-    console.log('category', category);
+    // const category = useSelector(getCategory());
 
     const pathArr = pathname.split('/').slice(1);
 
@@ -21,6 +19,9 @@ const Breadcrumbs = () => {
         {products: 'Продукты'},
         {edit: 'Редактирование'},
         {login: 'Войти'},
+        {adminpanel: 'Панель администратора'},
+        {users: 'Пользователи'},
+        {categories: 'Категории'},
     ];
 
     const pathWithNames = pathArr.map((path) => {

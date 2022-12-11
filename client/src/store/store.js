@@ -3,14 +3,14 @@ import counterReducer from '../features/counter/counterSlice';
 import productsReducer from './productsSlice';
 import usersReducer from './usersSlice';
 import brandsReducer from './brandSlice';
-import categoryReducer from './categorySlice';
+import categoriesReducer from './categoriesSlice';
 
 const rootReducer = combineReducers({
     counter: counterReducer,
     products: productsReducer,
     users: usersReducer,
     brands: brandsReducer,
-    category: categoryReducer,
+    categories: categoriesReducer,
 });
 
 export const store = configureStore({

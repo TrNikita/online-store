@@ -13,7 +13,7 @@ const schema = new Schema(
         role: {type: String, default: 'USER'},
     },
     {
-        timestamps: {createdAt: 'created_at'},
+        timestamps: true,
     },
 );
 

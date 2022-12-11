@@ -1,4 +1,4 @@
-const category = [
+const categories = [
     {
         _id: '1',
         name: 'Телефоны',
@@ -33,7 +33,7 @@ const category = [
 const fetchAll = () =>
     new Promise((resolve) => {
         window.setTimeout(function() {
-            resolve(category);
+            resolve(categories);
         }, 300);
     });
 
