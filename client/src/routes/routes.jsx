@@ -33,6 +33,10 @@ const routes = [
         element: <AdminPanel />,
         children: [
             {
+                path: '',
+                element: <UsersList />,
+            },
+            {
                 path: 'users',
                 element: <UsersList />,
             },

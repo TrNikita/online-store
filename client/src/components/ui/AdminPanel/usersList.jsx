@@ -5,26 +5,7 @@ import {useSelector} from 'react-redux';
 import UserTable from './userTable';
 
 const UsersList = () => {
-    // const dispatch = useDispatch();
     const users = useSelector(getUsersList());
-
-    // const handleDeleteUser = (user) => {
-    //     dispatch(removeUser(user._id));
-    // };
-    //
-    // const handleUpdateUser = (user) => {
-    //     console.log('user', user);
-    // };
-    //
-    // const [data, setData] = useState({});
-    // const handleChange = ({target}) => {
-    //     console.log('target', target);
-    //     setData((prevState) => ({
-    //         ...prevState,
-    //         [target.name]: target.value,
-    //     }));
-    //     console.log('data', data);
-    // };
 
     if (users) {
         const usersWOAdmin = users.filter((u) => u.role === 'USER');

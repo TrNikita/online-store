@@ -1,7 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {useDispatch, useSelector} from 'react-redux';
-import {getCategory, removeCategory} from '../../../store/categoriesSlice';
+import {
+    createCategory,
+    getCategory,
+    removeCategory,
+} from '../../../store/categoriesSlice';
 
 const CategoriesList = () => {
     const dispatch = useDispatch();
@@ -10,6 +14,21 @@ const CategoriesList = () => {
     const handleDeleteCategory = (category) => {
         dispatch(removeCategory(category._id));
     };
+
+    const handleCreateCategory = (category) => {
+        dispatch(createCategory(category));
+    };
+
+    const [data, setData] = useState({name: ''});
+
+    const handleChange = ({target}) => {
+        setData((prevState) => ({
+            ...prevState,
+            [target.name]: target.value,
+        }));
+    };
+
+    console.log('data', data);
 
     if (categories) {
         console.log('categories', categories);
@@ -44,6 +63,30 @@ const CategoriesList = () => {
                                 </td>
                             </tr>
                         ))}
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input
+                                    type='text'
+                                    className='input input-bordered input-md w-full max-w-xs'
+                                    value={data.name}
+                                    placeholder='Введите имя категории'
+                                    name='name'
+                                    onChange={handleChange}
+                                />
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <button
+                                    className='btn btn-ghost btn-xs'
+                                    onClick={() => handleCreateCategory(data)}
+                                >
+                                    Создать
+                                </button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
