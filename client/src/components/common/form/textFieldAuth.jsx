@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 
-const TextField = ({label, type, name, value, onChange, error}) => {
+const TextFieldAuth = ({label, type, name, value, onChange, error}) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleChange = ({target}) => {
@@ -71,10 +71,10 @@ const TextField = ({label, type, name, value, onChange, error}) => {
     );
 };
 
-TextField.defaultProps = {
+TextFieldAuth.defaultProps = {
     type: 'text',
 };
-TextField.propTypes = {
+TextFieldAuth.propTypes = {
     label: PropTypes.string,
     type: PropTypes.string,
     name: PropTypes.string,
@@ -83,4 +83,4 @@ TextField.propTypes = {
     error: PropTypes.string,
 };
 
-export default TextField;
+export default TextFieldAuth;

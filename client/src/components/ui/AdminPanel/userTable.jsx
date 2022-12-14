@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {removeUser, updateUser} from '../../../store/usersSlice';
 import {useDispatch} from 'react-redux';
-import ChangeTableForm from '../../common/form/changeTableForm';
+import TextFieldAdminPanel from '../../common/form/textFieldAdminPanel';
 import {dateAfterPost} from '../../../utils/dateAfterPost';
 
 const UserTable = ({user, index}) => {
@@ -27,13 +27,13 @@ const UserTable = ({user, index}) => {
     return (
         <>
             <th>{index + 1}</th>
-            <ChangeTableForm
+            <TextFieldAdminPanel
                 data={data}
                 dataValue={data.name}
                 objectValue={user.name}
                 handleChange={handleChange}
             />
-            <ChangeTableForm
+            <TextFieldAdminPanel
                 data={data}
                 dataValue={data.email}
                 objectValue={user.email}

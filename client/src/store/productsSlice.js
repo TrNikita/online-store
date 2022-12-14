@@ -38,6 +38,11 @@ const productsSlice = createSlice({
             );
             state.entities.splice(index, 1);
         },
+        productUpdateSuccessed: (state, action) => {
+            state.entities[
+                state.entities.findIndex((p) => p._id === action.payload._id)
+            ] = action.payload;
+        },
     },
 });
 
@@ -55,12 +60,15 @@ const {
     productRemovedFailed,
     // eslint-disable-next-line no-unused-vars
     productRemovedSuccess,
+    productUpdateSuccessed,
 } = actions;
 
 // eslint-disable-next-line no-unused-vars
 const productCreateRequested = createAction('products/productCreateRequested');
 // eslint-disable-next-line no-unused-vars
 const productRemoveRequested = createAction('products/productRemoveRequested');
+const productUpdateRequested = createAction('products/productUpdateRequested');
+const productUpdateFailed = createAction('products/productUpdateFailed');
 
 export const loadProductsList = () => async (dispatch) => {
     dispatch(productsRequested());
@@ -86,7 +94,31 @@ export const createProduct = (payload) => async (dispatch) => {
     }
 };
 
+export const updateProduct = (payload) => async (dispatch) => {
+    dispatch(productUpdateRequested());
+    try {
+        const {content} = await productService.update(payload);
+        dispatch(productUpdateSuccessed(content));
+    } catch (error) {
+        console.log('error', error);
+        error.response.data.message
+            ? dispatch(productUpdateFailed(error.response.data.message))
+            : dispatch(productUpdateFailed(error.response.data.error.message));
+    }
+};
+
+export const removeProduct = (payload) => async (dispatch) => {
+    dispatch(productRemoveRequested());
+    try {
+        await productService.remove(payload);
+        dispatch(productRemovedSuccess(payload));
+    } catch (e) {
+        dispatch(productRemovedFailed(e.message));
+    }
+};
+
 export const getProducts = () => (state) => state.products.entities;
+export const getProductErrors = () => (state) => state.products.error;
 
 export const getProductById = (productId) => (state) => {
     if (state.products.entities)

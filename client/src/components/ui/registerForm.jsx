@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {validator} from '../../utils/validator';
 import {useParams} from 'react-router-dom';
-import TextField from '../common/form/textField';
+import TextFieldAuth from '../common/form/textFieldAuth';
 import CheckBoxField from '../common/form/checkBoxField';
 import DropdownInfo from '../common/form/dropdownInfo';
 import {useDispatch} from 'react-redux';
@@ -99,7 +99,7 @@ const RegisterForm = () => {
                         </h1>
                     </div>
                     <div className='card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100'>
-                        <TextField
+                        <TextFieldAuth
                             label='Электронная почта'
                             type='email'
                             name='email'
@@ -107,7 +107,7 @@ const RegisterForm = () => {
                             value={data.email}
                             error={errors.email}
                         />
-                        <TextField
+                        <TextFieldAuth
                             label='Имя'
                             type='name'
                             name='name'
@@ -115,7 +115,7 @@ const RegisterForm = () => {
                             value={data.name}
                             error={errors.name}
                         />
-                        <TextField
+                        <TextFieldAuth
                             label='Пароль'
                             type='password'
                             name='password'
@@ -124,7 +124,7 @@ const RegisterForm = () => {
                             error={errors.password}
                         />
                         {params.admin ? (
-                            <TextField
+                            <TextFieldAuth
                                 label='Пароль админа'
                                 type='password'
                                 name='adminPassword'

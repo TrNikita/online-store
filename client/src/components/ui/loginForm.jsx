@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {validator} from '../../utils/validator';
-import TextField from '../common/form/textField';
+import TextFieldAuth from '../common/form/textFieldAuth';
 import {useDispatch, useSelector} from 'react-redux';
 import {getAuthErrors, login} from '../../store/usersSlice';
 
@@ -68,7 +68,7 @@ const LoginForm = () => {
                         <h1 className='text-3xl font-bold'>Войти</h1>
                     </div>
                     <div className='card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100'>
-                        <TextField
+                        <TextFieldAuth
                             label='Электронная почта'
                             type='email'
                             name='email'
@@ -76,7 +76,7 @@ const LoginForm = () => {
                             value={data.email}
                             error={errors.email}
                         />
-                        <TextField
+                        <TextFieldAuth
                             label='Пароль'
                             type='password'
                             name='password'

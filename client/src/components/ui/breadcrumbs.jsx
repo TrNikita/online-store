@@ -1,17 +1,17 @@
-import React, {useEffect} from 'react';
+import React, {memo, useEffect} from 'react';
 import {Link, useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {getProducts, loadProductsList} from '../../store/productsSlice';
-// import {getCategory} from '../../store/categorySlice';
+import {getCategory} from '../../store/categoriesSlice';
 
-const Breadcrumbs = () => {
+const Breadcrumbs = memo(() => {
     const {pathname} = useLocation();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(loadProductsList());
     }, []);
     const products = useSelector(getProducts());
-    // const category = useSelector(getCategory());
+    const categories = useSelector(getCategory());
 
     const pathArr = pathname.split('/').slice(1);
 
@@ -25,19 +25,27 @@ const Breadcrumbs = () => {
     ];
 
     const pathWithNames = pathArr.map((path) => {
+        // ищем в namesOfPath
         const findInNamesOfPath = namesOfPath.find(
             (name) => Object.keys(name).toString() === path,
         );
-        if (findInNamesOfPath) {
-            return findInNamesOfPath;
-        } else {
-            const findInProducts = products
-                ? products.find((a) => a._id.toString() === path)
-                : null;
-            const objWithNames = {};
-            objWithNames[findInProducts?._id] = findInProducts?.title;
-            return objWithNames;
-        }
+        if (findInNamesOfPath) return findInNamesOfPath;
+
+        // ищем в продуктах
+        const findInProducts = products
+            ? products.find((p) => p._id.toString() === path)
+            : null;
+        const objWithProductNames = {};
+        objWithProductNames[findInProducts?._id] = findInProducts?.name;
+        if (Object.values(objWithProductNames)[0]) return objWithProductNames;
+
+        // ищем в категориях
+        const findInCategories = categories
+            ? categories.find((c) => c.path.toString() === path)
+            : null;
+        const objWithCategoryNames = {};
+        objWithCategoryNames[findInCategories?.path] = findInCategories?.name;
+        return objWithCategoryNames;
     });
 
     const container = {};
@@ -61,6 +69,6 @@ const Breadcrumbs = () => {
             </ul>
         </div>
     );
-};
+});
 
 export default Breadcrumbs;

@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {
     createCategory,
     getCategory,
-    getCreateCategoryErrors,
+    getCategoryErrors,
     removeCategory,
 } from '../../../store/categoriesSlice';
 import {generateCreateError} from '../../../utils/generateCreateError';
@@ -13,7 +13,7 @@ import {dateAfterPost} from '../../../utils/dateAfterPost';
 const CategoriesList = () => {
     const dispatch = useDispatch();
     const categories = useSelector(getCategory());
-    const createCategoryError = useSelector(getCreateCategoryErrors());
+    const createCategoryError = useSelector(getCategoryErrors());
 
     const handleDeleteCategory = (category) => {
         dispatch(removeCategory(category._id));
@@ -76,11 +76,7 @@ const CategoriesList = () => {
                                     onChange={handleChange}
                                 />
                             </td>
-                            <td className='text-xs text-red-500 italic'>
-                                {createCategoryError
-                                    ? generateCreateError(createCategoryError)
-                                    : null}
-                            </td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td>
@@ -92,6 +88,14 @@ const CategoriesList = () => {
                                 </button>
                             </td>
                         </tr>
+                        {createCategoryError ? (
+                            <tr>
+                                <td></td>
+                                <td className='text-xs text-red-500 italic'>
+                                    {generateCreateError(createCategoryError)}
+                                </td>
+                            </tr>
+                        ) : null}
                     </tbody>
                 </table>
             </div>

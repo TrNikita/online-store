@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {useDispatch, useSelector} from 'react-redux';
-import {createProduct, getProducts} from '../../../store/productsSlice';
+import {
+    createProduct,
+    getProductErrors,
+    getProducts,
+} from '../../../store/productsSlice';
 import {getCategory, loadCategoriesList} from '../../../store/categoriesSlice';
-import AvatarLoader from '../Loaders/avatarLoader';
-import {dateAfterPost} from '../../../utils/dateAfterPost';
 import ProductTableAdmin from './productTableAdmin';
+import {generateCreateError} from '../../../utils/generateCreateError';
+import AdminPanelLoader from '../Loaders/adminPanelLoader';
 
 const ProductsListAdmin = () => {
-    const handleUpdateUser = (user) => {
-        console.log('user', user);
-    };
-
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(loadCategoriesList());
@@ -19,6 +19,7 @@ const ProductsListAdmin = () => {
 
     const categories = useSelector(getCategory());
     const products = useSelector(getProducts());
+    const createProductError = useSelector(getProductErrors());
 
     const tags = ['', 'New', 'Выгодно', 'Успевай'];
 
@@ -43,20 +44,14 @@ const ProductsListAdmin = () => {
             [target.name]: target.value,
         }));
     };
-    console.log('data', data);
 
-    function findCategory(category) {
-        const findCategory = categories.find((c) => c._id === category);
-        return findCategory ? findCategory.name : 'Без категории';
-    }
-
-    if (!products || !categories) return <AvatarLoader />;
+    if (!products || !categories) return <AdminPanelLoader />;
     return (
         <div className='overflow-x-auto'>
             <table className='table table-compact w-full'>
                 <thead>
                     <tr>
-                        <th></th>
+                        <th>№</th>
                         <th>Image</th>
                         <th>Название</th>
                         <th>Категория</th>
@@ -75,49 +70,24 @@ const ProductsListAdmin = () => {
                 <tbody>
                     {products.map((p, index) => (
                         <tr key={p._id}>
-                            <th>{index + 1}</th>
-                            <th>
-                                <div className='flex items-center space-x-3'>
-                                    <div className='avatar'>
-                                        <div className='mask mask-squircle w-12 h-12'>
-                                            <img
-                                                src='/tailwind-css-component-profile-2@56w.png'
-                                                alt='img'
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </th>
-                            <td>{p.name}</td>
-                            <td>{findCategory(p.category)}</td>
-                            <td>{p.brand}</td>
-                            <td>{p.year}</td>
-                            <td>{p.prevPrice}</td>
-                            <td>{p.price}</td>
-                            <td>{p.tags}</td>
-                            <td className='text-xs whitespace-normal'>
-                                {p.description}
-                            </td>
-                            <td>{dateAfterPost(p.createdAt)}</td>
-                            <td>{dateAfterPost(p.updatedAt)}</td>
-                            <td>
-                                <button
-                                    className='btn btn-ghost btn-xs'
-                                    onClick={() => handleUpdateUser(p)}
-                                >
-                                    Обновить
-                                </button>
-                            </td>
-                            <td>
-                                <button className='btn btn-ghost btn-xs'>
-                                    Удалить
-                                </button>
-                            </td>
+                            <ProductTableAdmin
+                                product={p}
+                                index={index}
+                                categories={categories}
+                            />
                         </tr>
                     ))}
                     <tr>
                         <td></td>
-                        <td></td>
+                        <td>
+                            {/* <input */}
+                            {/*     type='file' */}
+                            {/*     className='file-input file-input-bordered file-input-xs w-full max-w-xs' */}
+                            {/*     value={data.image} */}
+                            {/*     name='image' */}
+                            {/*     onChange={handleChange} */}
+                            {/* /> */}
+                        </td>
                         <td>
                             <input
                                 id='name'
@@ -229,12 +199,15 @@ const ProductsListAdmin = () => {
                             </button>
                         </td>
                     </tr>
-
-                    {products.map((p, index) => (
-                        <tr key={p._id}>
-                            <ProductTableAdmin product={p} index={index} />
+                    {createProductError ? (
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td className='text-xs text-red-500 italic'>
+                                {generateCreateError(createProductError)}
+                            </td>
                         </tr>
-                    ))}
+                    ) : null}
                 </tbody>
             </table>
         </div>

@@ -3,7 +3,6 @@ const checkAdmin = require('../middleware/checkAdmin.middleware');
 const Category = require('../models/Category');
 const router = express.Router({mergeParams: true});
 const CyrillicToTranslit = require('cyrillic-to-translit-js');
-const User = require('../models/User');
 
 // api/category
 
@@ -58,7 +57,7 @@ router.delete('/:categoryId', checkAdmin, async (req, res) => {
         return res.send({message: `${categoryId} удален`});
     } catch (e) {
         res.status(500).json({
-            message: 'На сервере произошла ошибка. Попробуйте позже',
+            message: e.message,
         });
     }
 });

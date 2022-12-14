@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-// import {useDispatch} from 'react-redux';
-import ChangeTableForm from '../../common/form/changeTableForm';
+import TextFieldAdminPanel from '../../common/form/textFieldAdminPanel';
 import {dateAfterPost} from '../../../utils/dateAfterPost';
+import SelectFieldAdminPanel from '../../common/form/selectFieldAdminPanel';
+import {useDispatch} from 'react-redux';
+import {removeProduct, updateProduct} from '../../../store/productsSlice';
 
-const ProductTableAdmin = ({product, index}) => {
-    // const dispatch = useDispatch();
-
+const ProductTableAdmin = ({product, index, categories}) => {
+    const dispatch = useDispatch();
     const [data, setData] = useState(product);
 
     const handleChange = ({target}) => {
@@ -16,60 +17,61 @@ const ProductTableAdmin = ({product, index}) => {
         }));
     };
 
-    const handleDeleteProduct = (user) => {
-        console.log('user', user);
+    const handleDeleteProduct = (product) => {
+        dispatch(removeProduct(product._id));
     };
     const handleUpdateProduct = () => {
-        console.log('data', data);
+        dispatch(updateProduct(data));
     };
 
     return (
         <>
             <th>{index + 1}</th>
             <td></td>
-            <ChangeTableForm
+            <TextFieldAdminPanel
                 data={data}
                 dataValue={data.name}
                 objectValue={product.name}
                 handleChange={handleChange}
             />
-            <ChangeTableForm
-                data={data}
+            <SelectFieldAdminPanel
+                handleChange={handleChange}
                 dataValue={data.category}
                 objectValue={product.category}
-                handleChange={handleChange}
+                data={data}
+                options={categories}
             />
-            <ChangeTableForm
+            <TextFieldAdminPanel
                 data={data}
                 dataValue={data.brand}
                 objectValue={product.brand}
                 handleChange={handleChange}
             />
-            <ChangeTableForm
+            <TextFieldAdminPanel
                 data={data}
                 dataValue={data.year}
                 objectValue={product.year}
                 handleChange={handleChange}
             />
-            <ChangeTableForm
+            <TextFieldAdminPanel
                 data={data}
                 dataValue={data.prevPrice}
                 objectValue={product.prevPrice}
                 handleChange={handleChange}
             />
-            <ChangeTableForm
+            <TextFieldAdminPanel
                 data={data}
                 dataValue={data.price}
                 objectValue={product.price}
                 handleChange={handleChange}
             />
-            <ChangeTableForm
+            <TextFieldAdminPanel
                 data={data}
                 dataValue={data.tags}
                 objectValue={product.tags}
                 handleChange={handleChange}
             />
-            <ChangeTableForm
+            <TextFieldAdminPanel
                 data={data}
                 dataValue={data.description}
                 objectValue={product.description}
@@ -99,6 +101,7 @@ const ProductTableAdmin = ({product, index}) => {
 
 ProductTableAdmin.propTypes = {
     product: PropTypes.object,
+    categories: PropTypes.array,
     index: PropTypes.number,
 };
 
