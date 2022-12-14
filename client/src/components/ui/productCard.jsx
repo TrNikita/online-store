@@ -20,7 +20,7 @@ const ProductCard = ({products}) => {
                     </Link>
                     <div className='card-body px-2 py-1'>
                         <h2 className='card-title'>
-                            <Link to={`/products/${p._id}`}>{p.title}</Link>
+                            <Link to={`/products/${p._id}`}>{p.name}</Link>
                             {p.tags ? (
                                 <div className='badge badge-secondary'>
                                     {p.tags}
@@ -28,7 +28,10 @@ const ProductCard = ({products}) => {
                             ) : null}
                             {p.prevPrice ? (
                                 <div className='badge badge-secondary'>
-                                    Акция
+                                    {Math.round(
+                                        (p.price / p.prevPrice - 1) * 100,
+                                    )}
+                                    %
                                 </div>
                             ) : null}
                         </h2>
@@ -38,12 +41,12 @@ const ProductCard = ({products}) => {
                         </div>
                         <div className='card-actions justify-between'>
                             <div className='flex py-2'>
-                                <p className='text-xl px-2'>{p.price}$</p>
                                 {p.prevPrice ? (
-                                    <p className='text-xl line-through italic text-gray-500'>
-                                        {p.prevPrice}$
+                                    <p className='text-s line-through italic text-gray-500'>
+                                        {p.prevPrice}
                                     </p>
                                 ) : null}
+                                <p className='text-xl px-2'>{p.price} ₽</p>
                             </div>
                             <button className='btn btn-primary'>Buy Now</button>
                         </div>

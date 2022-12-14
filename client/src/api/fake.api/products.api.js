@@ -1,11 +1,11 @@
 const products = [
     {
         _id: 1,
-        title: 'Iphone 13',
+        name: 'Iphone 13',
         category: '1',
         brand: '1',
         year: 2022,
-        prevPrice: '',
+        prevPrice: 1500,
         price: 999,
         rate: 5,
         isFavourite: false,
@@ -16,7 +16,7 @@ const products = [
     },
     {
         _id: 2,
-        title: 'Galaxy note',
+        name: 'Galaxy note',
         category: '2',
         brand: '2',
         year: 2021,
@@ -31,7 +31,7 @@ const products = [
     },
     {
         _id: 3,
-        title: 'macbook',
+        name: 'macbook',
         category: '3',
         brand: '1',
         year: 2020,
@@ -46,7 +46,7 @@ const products = [
     },
     {
         _id: 4,
-        title: 'matebook',
+        name: 'matebook',
         category: '4',
         brand: '3',
         year: 2019,
@@ -61,7 +61,7 @@ const products = [
     },
     {
         _id: 5,
-        title: 'matebook',
+        name: 'matebook',
         category: '5',
         brand: '3',
         year: 2019,
@@ -76,7 +76,7 @@ const products = [
     },
     {
         _id: 6,
-        title: 'matebook',
+        name: 'matebook',
         category: '6',
         brand: '3',
         year: 2019,
@@ -91,7 +91,7 @@ const products = [
     },
     {
         _id: 7,
-        title: 'matebook',
+        name: 'matebook',
         category: '1',
         brand: '6',
         year: 2019,
@@ -106,7 +106,7 @@ const products = [
     },
     {
         _id: 8,
-        title: 'matebook',
+        name: 'matebook',
         category: '4',
         brand: '5',
         year: 2019,
@@ -121,7 +121,7 @@ const products = [
     },
     {
         _id: 9,
-        title: 'matebook',
+        name: 'matebook',
         category: '5',
         brand: '4',
         year: 2019,
@@ -136,7 +136,7 @@ const products = [
     },
     {
         _id: 10,
-        title: 'matebook',
+        name: 'matebook',
         category: '3',
         brand: '2',
         year: 2019,
@@ -151,7 +151,7 @@ const products = [
     },
     {
         _id: 11,
-        title: 'matebook',
+        name: 'matebook',
         category: '3',
         brand: '3',
         year: 2019,

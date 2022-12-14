@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ChangeTableForm = ({data, objectValue, dataValue, handleChange}) => {
+    console.log('objectValue', objectValue);
     const index = Object.values(data).findIndex((i) => i === dataValue);
     const name = Object.keys(data)[index];
 
@@ -19,8 +20,8 @@ const ChangeTableForm = ({data, objectValue, dataValue, handleChange}) => {
 };
 
 ChangeTableForm.propTypes = {
-    objectValue: PropTypes.string.isRequired,
-    dataValue: PropTypes.string.isRequired,
+    objectValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    dataValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     data: PropTypes.any,
     handleChange: PropTypes.func.isRequired,
 };

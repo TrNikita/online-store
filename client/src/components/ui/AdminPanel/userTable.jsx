@@ -39,7 +39,7 @@ const UserTable = ({user, index}) => {
                 objectValue={user.email}
                 handleChange={handleChange}
             />
-            <td>{dateAfterPost(user.created_at)}</td>
+            <td>{dateAfterPost(user.createdAt)}</td>
             <td>{dateAfterPost(user.updatedAt)}</td>
             <td>
                 <button

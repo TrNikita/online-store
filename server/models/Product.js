@@ -2,14 +2,11 @@ const {Schema, model} = require('mongoose');
 
 const schema = new Schema(
     {
-        title: {
+        name: {
             type: String,
             required: true,
         },
         brand: {
-            // todo return to Brand
-            // type: Schema.Types.ObjectId,
-            // ref: 'Brand',
             type: String,
             required: true,
         },
@@ -27,25 +24,17 @@ const schema = new Schema(
             type: Number,
             required: true,
         },
-        rate: {
-            type: Schema.Types.ObjectId,
-            ref: 'Rate',
-        },
-        Favourite: {
-            type: Schema.Types.ObjectId,
-            ref: 'Favourite',
-        },
+        // rate: {
+        //     type: Schema.Types.ObjectId,
+        //     ref: 'Rate',
+        // },
         tags: {
             type: String,
             default: 'New',
         },
-        promotion: {
-            type: String,
-            default: 'Акции',
-        },
         description: {
             type: String,
-            default: 'Описание',
+            default: '',
         },
         image: {
             type: String,
