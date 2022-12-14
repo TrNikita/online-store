@@ -10,15 +10,23 @@ const ProductsListAdmin = () => {
 
     const products = useSelector(getProducts());
     if (products) {
-        console.log('products', products);
+        console.log('productssss', products);
         return (
             <div className='overflow-x-auto'>
                 <table className='table table-compact w-full'>
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Name</th>
-                            <th>Email</th>
+                            <th>Image</th>
+                            <th>Название</th>
+                            <th>Категория</th>
+                            <th>Бренд</th>
+                            <th>Год</th>
+                            <th>Прошлая цена</th>
+                            <th>Цена</th>
+                            <th>Акции</th>
+                            <th>Теги</th>
+                            <th>Описание</th>
                             <th>Создан</th>
                             <th>Обновлен</th>
                             <th>Обновить</th>
@@ -29,8 +37,35 @@ const ProductsListAdmin = () => {
                         {products.map((u, index) => (
                             <tr key={u._id}>
                                 <th>{index + 1}</th>
-                                <td>{u.name}</td>
-                                <td>{u.email}</td>
+                                <th>
+                                    <div className='flex items-center space-x-3'>
+                                        <div className='avatar'>
+                                            <div className='mask mask-squircle w-12 h-12'>
+                                                <img
+                                                    src='/tailwind-css-component-profile-2@56w.png'
+                                                    alt='Avatar Tailwind CSS Component'
+                                                />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className='font-bold'>
+                                                Hart Hagerty
+                                            </div>
+                                            <div className='text-sm opacity-50'>
+                                                United States
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td>{u.title}</td>
+                                <td>{u.category}</td>
+                                <td>{u.brand}</td>
+                                <td>{u.year}</td>
+                                <td>{u.prevPrice}</td>
+                                <td>{u.price}</td>
+                                <td>{u.promotion}</td>
+                                <td>{u.tags}</td>
+                                <td>{u.description}</td>
                                 <td>{u.created_at}</td>
                                 <td>{u.updatedAt}</td>
                                 <td>

@@ -1,13 +1,19 @@
-import React, {memo} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {getCurrentUserData, loadUsersList} from '../../../store/usersSlice';
+import {letters} from '../../../utils/letters';
+import AvatarLoader from '../Loaders/avatarLoader';
 
-const Avatar = memo(({user}) => {
-    const userNameArr = user.name.split(' ');
-    const letters =
-        userNameArr.length === 2
-            ? userNameArr[0][0] + userNameArr[1][0]
-            : userNameArr[0][0];
+const Avatar = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadUsersList());
+    }, []);
+
+    const user = useSelector(getCurrentUserData());
 
     const getAvatarClasses = () => {
         return (
@@ -16,11 +22,14 @@ const Avatar = memo(({user}) => {
         );
     };
 
+    if (!user) return <AvatarLoader />;
+
+    const nameLetters = letters(user.name);
     return (
         <div className='dropdown dropdown-end'>
             <div className='avatar placeholder'>
                 <label tabIndex={0} className={getAvatarClasses()}>
-                    <span className='text-xl'>{letters}</span>
+                    <span className='text-xl'>{nameLetters}</span>
                 </label>
             </div>
 
@@ -45,7 +54,7 @@ const Avatar = memo(({user}) => {
             </ul>
         </div>
     );
-});
+};
 
 Avatar.propTypes = {
     user: PropTypes.object,

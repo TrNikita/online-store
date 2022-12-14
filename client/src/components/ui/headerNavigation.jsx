@@ -6,7 +6,7 @@ const HeaderNavigation = ({categories}) => {
     // console.log('category', category);
 
     return (
-        <footer className='bg-neutral-content/25 text-neutral flex flex-row justify-between px-24 shadow'>
+        <footer className='bg-neutral-content/25 text-neutral flex flex-row justify-around px-24 shadow'>
             {categories ? (
                 <>
                     {categories.map((c) => (
@@ -15,12 +15,12 @@ const HeaderNavigation = ({categories}) => {
                             className='link link-hover'
                             key={c._id}
                         >
-                            {c.name}
+                            {c.name}{' '}
                         </Link>
                     ))}
                 </>
             ) : (
-                <span className='link link-hover'>{' '}</span>
+                <span className='link link-hover'> </span>
             )}
         </footer>
     );

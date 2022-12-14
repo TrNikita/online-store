@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {removeUser, updateUser} from '../../../store/usersSlice';
 import {useDispatch} from 'react-redux';
 import ChangeTableForm from '../../common/form/changeTableForm';
+import {dateAfterPost} from '../../../utils/dateAfterPost';
 
 const UserTable = ({user, index}) => {
     const dispatch = useDispatch();
@@ -38,8 +39,8 @@ const UserTable = ({user, index}) => {
                 objectValue={user.email}
                 handleChange={handleChange}
             />
-            <td>{user.created_at}</td>
-            <td>{user.updatedAt}</td>
+            <td>{dateAfterPost(user.created_at)}</td>
+            <td>{dateAfterPost(user.updatedAt)}</td>
             <td>
                 <button
                     className='btn btn-ghost btn-xs'

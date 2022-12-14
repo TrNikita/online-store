@@ -1,11 +1,7 @@
 import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-    getCurrentUserData,
-    // getIsLoggedIn,
-    loadUsersList,
-} from '../../store/usersSlice';
+import {getIsLoggedIn, loadUsersList} from '../../store/usersSlice';
 import Avatar from './NavBar/avatar';
 import Basket from './NavBar/basket';
 import Search from './NavBar/search';
@@ -16,15 +12,13 @@ import {getCategory, loadCategoriesList} from '../../store/categoriesSlice';
 
 const NavBar = () => {
     const dispatch = useDispatch();
-    const user = useSelector(getCurrentUserData());
-
     useEffect(() => {
         dispatch(loadUsersList());
         dispatch(loadCategoriesList());
     }, []);
 
+    const isLoggedIn = useSelector(getIsLoggedIn());
     const categories = useSelector(getCategory());
-    // const isLoggedIn = useSelector(getIsLoggedIn());
 
     return (
         <>
@@ -37,10 +31,10 @@ const NavBar = () => {
                     </Link>
                 </div>
                 <Search />
-                {user ? (
+                {isLoggedIn ? (
                     <>
                         <Basket />
-                        <Avatar user={user} />
+                        <Avatar />
                     </>
                 ) : (
                     <Link to='login' className='btn'>

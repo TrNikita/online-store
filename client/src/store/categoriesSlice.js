@@ -77,7 +77,12 @@ export const createCategory = (payload) => async (dispatch) => {
         console.log('content', content);
         dispatch(categoryCreatedSuccess(content));
     } catch (error) {
-        dispatch(categoryCreatedFailed(error.message));
+        console.log('error', error);
+        error.response.data.message
+            ? dispatch(categoryCreatedFailed(error.response.data.message))
+            : dispatch(
+                  categoryCreatedFailed(error.response.data.error.message),
+              );
     }
 };
 
@@ -92,5 +97,6 @@ export const removeCategory = (payload) => async (dispatch) => {
 };
 
 export const getCategory = () => (state) => state.categories.entities;
+export const getCreateCategoryErrors = () => (state) => state.categories.error;
 
 export default categoriesReducer;

@@ -4,12 +4,16 @@ import {useDispatch, useSelector} from 'react-redux';
 import {
     createCategory,
     getCategory,
+    getCreateCategoryErrors,
     removeCategory,
 } from '../../../store/categoriesSlice';
+import {generateCreateError} from '../../../utils/generateCreateError';
+import {dateAfterPost} from '../../../utils/dateAfterPost';
 
 const CategoriesList = () => {
     const dispatch = useDispatch();
     const categories = useSelector(getCategory());
+    const createCategoryError = useSelector(getCreateCategoryErrors());
 
     const handleDeleteCategory = (category) => {
         dispatch(removeCategory(category._id));
@@ -28,10 +32,7 @@ const CategoriesList = () => {
         }));
     };
 
-    console.log('data', data);
-
-    if (categories) {
-        console.log('categories', categories);
+    if (categories)
         return (
             <div className='overflow-x-auto'>
                 <table className='table table-compact w-full'>
@@ -51,8 +52,8 @@ const CategoriesList = () => {
                                 <th>{index + 1}</th>
                                 <td>{c.name}</td>
                                 <td>{c.path}</td>
-                                <td>{c.createdAt}</td>
-                                <td>{c.updatedAt}</td>
+                                <td>{dateAfterPost(c.createdAt)}</td>
+                                <td>{dateAfterPost(c.updatedAt)}</td>
                                 <td>
                                     <button
                                         className='btn btn-ghost btn-xs'
@@ -70,12 +71,16 @@ const CategoriesList = () => {
                                     type='text'
                                     className='input input-bordered input-md w-full max-w-xs'
                                     value={data.name}
-                                    placeholder='Введите имя категории'
+                                    placeholder='Введите название категории'
                                     name='name'
                                     onChange={handleChange}
                                 />
                             </td>
-                            <td></td>
+                            <td className='text-xs text-red-500 italic'>
+                                {createCategoryError
+                                    ? generateCreateError(createCategoryError)
+                                    : null}
+                            </td>
                             <td></td>
                             <td></td>
                             <td>
@@ -91,7 +96,6 @@ const CategoriesList = () => {
                 </table>
             </div>
         );
-    }
 };
 
 CategoriesList.propTypes = {

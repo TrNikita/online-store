@@ -3,6 +3,7 @@ const checkAdmin = require('../middleware/checkAdmin.middleware');
 const Category = require('../models/Category');
 const router = express.Router({mergeParams: true});
 const CyrillicToTranslit = require('cyrillic-to-translit-js');
+const User = require('../models/User');
 
 // api/category
 
@@ -24,6 +25,17 @@ router
             const path = cyrillicToTranslit
                 .transform(req.body.name, '_')
                 .toLowerCase();
+
+            const {name} = req.body;
+            const existingCategory = await Category.findOne({name});
+            // проверка на наличие категории
+            if (existingCategory)
+                return res.status(400).json({
+                    error: {
+                        message: 'CATEGORY_EXISTS',
+                        code: 400,
+                    },
+                });
 
             const newCategory = await Category.create({
                 ...req.body,
