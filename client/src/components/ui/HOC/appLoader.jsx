@@ -6,10 +6,12 @@ import {loadCategoriesList} from '../../../store/categoriesSlice';
 
 const AppLoader = ({children}) => {
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(loadProductsList());
         dispatch(loadCategoriesList());
     }, []);
+
     return children;
 };
 

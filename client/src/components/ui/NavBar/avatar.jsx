@@ -43,7 +43,7 @@ const Avatar = () => {
                     </li>
                 ) : null}
                 <li>
-                    <Link to='logout'>Logout</Link>
+                    <Link to='logout'>Выйти</Link>
                 </li>
             </ul>
         </div>

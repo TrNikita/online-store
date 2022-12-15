@@ -1,7 +1,5 @@
-// eslint-disable-next-line no-unused-vars
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-// eslint-disable-next-line no-unused-vars
 import {useDispatch, useSelector} from 'react-redux';
 import {
     createProduct,
@@ -10,7 +8,6 @@ import {
 } from '../../../store/productsSlice';
 import {
     getCategories,
-    // loadCategoriesList,
 } from '../../../store/categoriesSlice';
 import ProductTableAdmin from './productTableAdmin';
 import {generateCreateError} from '../../../utils/generateCreateError';
@@ -18,9 +15,6 @@ import AdminPanelLoader from '../Loaders/adminPanelLoader';
 
 const ProductsListAdmin = () => {
     const dispatch = useDispatch();
-    // useEffect(() => {
-    //     dispatch(loadCategoriesList());
-    // }, []);
 
     const categories = useSelector(getCategories());
     const products = useSelector(getProducts());

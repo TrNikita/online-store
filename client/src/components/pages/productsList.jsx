@@ -1,20 +1,12 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useSelector} from 'react-redux';
-// eslint-disable-next-line no-unused-vars
-import {getProducts, loadProductsList} from '../../store/productsSlice';
+import {getProducts} from '../../store/productsSlice';
 import {useParams} from 'react-router-dom';
 import ProductCard from '../ui/productCard';
-// eslint-disable-next-line no-unused-vars
-import {getCategories, loadCategoriesList} from '../../store/categoriesSlice';
+import {getCategories} from '../../store/categoriesSlice';
 
 const ProductsList = () => {
     const params = useParams();
-    // const dispatch = useDispatch();
-
-    useEffect(() => {
-        // dispatch(loadProductsList());
-        // dispatch(loadCategoriesList());
-    }, []);
 
     const products = useSelector(getProducts());
     const categories = useSelector(getCategories());
