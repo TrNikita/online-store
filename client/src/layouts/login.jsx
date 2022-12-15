@@ -20,7 +20,7 @@ const Login = memo(() => {
             <div className='p-4 flex-1 justify-center'>
                 {formType === 'register' ? <RegisterForm /> : <LoginForm />}
 
-                <div className='hero-content lg:flex-row-reverse p-2'>
+                <div className='hero-content max-w-full lg:flex-row-reverse p-2'>
                     <button
                         className='p-2 btn btn-outline hero card w-full max-w-sm shadow-2xl bg-base-100 italic
                         hover:transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:duration-300

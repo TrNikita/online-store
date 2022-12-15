@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {getProducts, loadProductsList} from '../../store/productsSlice';
 import {useParams} from 'react-router-dom';
-import PropTypes from 'prop-types';
 import ProductCard from '../ui/productCard';
+import {getCategories, loadCategoriesList} from '../../store/categoriesSlice';
 
 const ProductsList = () => {
     const params = useParams();
@@ -12,14 +12,12 @@ const ProductsList = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(loadProductsList());
+        dispatch(loadCategoriesList());
     }, []);
     const products = useSelector(getProducts());
+    const categories = useSelector(getCategories());
 
-    if (products) return <ProductCard products={products} />;
-};
-
-ProductsList.propTypes = {
-    category: PropTypes.string,
+    if (products && categories) return <ProductCard products={products} categories={categories} />;
 };
 
 export default ProductsList;

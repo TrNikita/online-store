@@ -37,20 +37,14 @@ const Avatar = () => {
                 tabIndex={0}
                 className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52'
             >
-                <li>
-                    <a className='justify-between'>
-                        Profile
-                        <span className='badge'>+1</span>
-                    </a>
-                </li>
-                <li>
-                    <Link to='logout'>Logout</Link>
-                </li>
                 {user.role === 'ADMIN' ? (
                     <li>
                         <Link to='adminpanel'>Панель администратора</Link>
                     </li>
                 ) : null}
+                <li>
+                    <Link to='logout'>Logout</Link>
+                </li>
             </ul>
         </div>
     );

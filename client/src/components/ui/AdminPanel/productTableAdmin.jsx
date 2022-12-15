@@ -27,7 +27,17 @@ const ProductTableAdmin = ({product, index, categories}) => {
     return (
         <>
             <th>{index + 1}</th>
-            <td></td>
+            <td>
+                <div className='mask mask-squircle w-12 h-12'>
+                    <img src={product.imgUrl} alt='img' />
+                </div>
+            </td>
+            <TextFieldAdminPanel
+                data={data}
+                dataValue={data.imgUrl}
+                objectValue={product.imgUrl}
+                handleChange={handleChange}
+            />
             <TextFieldAdminPanel
                 data={data}
                 dataValue={data.name}
@@ -77,11 +87,11 @@ const ProductTableAdmin = ({product, index, categories}) => {
                 objectValue={product.description}
                 handleChange={handleChange}
             />
-            <td>{dateAfterPost(product.createdAt)}</td>
-            <td>{dateAfterPost(product.updatedAt)}</td>
+            <td className='text-xs'>{dateAfterPost(product.createdAt)}</td>
+            <td className='text-xs'>{dateAfterPost(product.updatedAt)}</td>
             <td>
                 <button
-                    className='btn btn-ghost btn-xs'
+                    className='btn btn-xs'
                     onClick={() => handleUpdateProduct(product)}
                 >
                     Обновить
@@ -89,7 +99,7 @@ const ProductTableAdmin = ({product, index, categories}) => {
             </td>
             <td>
                 <button
-                    className='btn btn-ghost btn-xs'
+                    className='btn btn-xs'
                     onClick={() => handleDeleteProduct(product)}
                 >
                     Удалить

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {useDispatch, useSelector} from 'react-redux';
 import {
     createCategory,
-    getCategory,
+    getCategories,
     getCategoryErrors,
     removeCategory,
 } from '../../../store/categoriesSlice';
@@ -12,7 +12,7 @@ import {dateAfterPost} from '../../../utils/dateAfterPost';
 
 const CategoriesList = () => {
     const dispatch = useDispatch();
-    const categories = useSelector(getCategory());
+    const categories = useSelector(getCategories());
     const createCategoryError = useSelector(getCategoryErrors());
 
     const handleDeleteCategory = (category) => {
@@ -52,11 +52,11 @@ const CategoriesList = () => {
                                 <th>{index + 1}</th>
                                 <td>{c.name}</td>
                                 <td>{c.path}</td>
-                                <td>{dateAfterPost(c.createdAt)}</td>
-                                <td>{dateAfterPost(c.updatedAt)}</td>
+                                <td className='text-xs'>{dateAfterPost(c.createdAt)}</td>
+                                <td className='text-xs'>{dateAfterPost(c.updatedAt)}</td>
                                 <td>
                                     <button
-                                        className='btn btn-ghost btn-xs'
+                                        className='btn btn-xs'
                                         onClick={() => handleDeleteCategory(c)}
                                     >
                                         Удалить
@@ -81,7 +81,7 @@ const CategoriesList = () => {
                             <td></td>
                             <td>
                                 <button
-                                    className='btn btn-ghost btn-xs'
+                                    className='btn btn-xs'
                                     onClick={() => handleCreateCategory(data)}
                                 >
                                     Создать

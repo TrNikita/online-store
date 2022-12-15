@@ -39,11 +39,11 @@ const UserTable = ({user, index}) => {
                 objectValue={user.email}
                 handleChange={handleChange}
             />
-            <td>{dateAfterPost(user.createdAt)}</td>
-            <td>{dateAfterPost(user.updatedAt)}</td>
+            <td className='text-xs'>{dateAfterPost(user.createdAt)}</td>
+            <td className='text-xs'>{dateAfterPost(user.updatedAt)}</td>
             <td>
                 <button
-                    className='btn btn-ghost btn-xs'
+                    className='btn btn-xs'
                     onClick={() => handleUpdateUser(user)}
                 >
                     Обновить
@@ -51,7 +51,7 @@ const UserTable = ({user, index}) => {
             </td>
             <td>
                 <button
-                    className='btn btn-ghost btn-xs'
+                    className='btn btn-xs'
                     onClick={() => handleDeleteUser(user)}
                 >
                     Удалить

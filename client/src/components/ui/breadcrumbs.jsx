@@ -2,7 +2,7 @@ import React, {memo, useEffect} from 'react';
 import {Link, useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {getProducts, loadProductsList} from '../../store/productsSlice';
-import {getCategory} from '../../store/categoriesSlice';
+import {getCategories} from '../../store/categoriesSlice';
 
 const Breadcrumbs = memo(() => {
     const {pathname} = useLocation();
@@ -11,7 +11,7 @@ const Breadcrumbs = memo(() => {
         dispatch(loadProductsList());
     }, []);
     const products = useSelector(getProducts());
-    const categories = useSelector(getCategory());
+    const categories = useSelector(getCategories());
 
     const pathArr = pathname.split('/').slice(1);
 

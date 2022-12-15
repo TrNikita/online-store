@@ -11,6 +11,7 @@ const initialState = localStorageService.getAccessToken()
           isLoading: true,
           error: null,
           auth: {userId: localStorageService.getUserId()},
+          authError: null,
           isLoggedIn: true,
           dataLoaded: false,
       }
@@ -19,6 +20,7 @@ const initialState = localStorageService.getAccessToken()
           isLoading: false,
           error: null,
           auth: null,
+          authError: null,
           isLoggedIn: false,
           dataLoaded: false,
       };
@@ -44,7 +46,7 @@ const usersSlice = createSlice({
             state.isLoggedIn = true;
         },
         authRequestFailed: (state, action) => {
-            state.error = action.payload;
+            state.authError = action.payload;
         },
         userCreated: (state, action) => {
             state.entities.push(action.payload);
@@ -61,7 +63,7 @@ const usersSlice = createSlice({
             ] = action.payload;
         },
         authRequested: (state) => {
-            state.error = null;
+            state.authError = null;
         },
         userRemovedFailed: (state, action) => {
             state.error = action.payload;
@@ -124,7 +126,13 @@ export const signUp = (payload) => async (dispatch) => {
         dispatch(authRequestSuccess({userId: data.userId}));
         history.go(-1);
     } catch (error) {
-        dispatch(authRequestFailed(error.message));
+        const {code, message} = error.response.data.error;
+        if (code === 400) {
+            const errorMessage = generateAuthError(message);
+            dispatch(authRequestFailed(errorMessage));
+        } else {
+            dispatch(authRequestFailed(error.message));
+        }
     }
 };
 export const logOut = () => (dispatch) => {
@@ -181,6 +189,6 @@ export const getIsLoggedIn = () => (state) => state.users.isLoggedIn;
 export const getDataStatus = () => (state) => state.users.dataLoaded;
 export const getUsersLoadingStatus = () => (state) => state.users.isLoading;
 export const getCurrentUserId = () => (state) => state.users.auth.userId;
-export const getAuthErrors = () => (state) => state.users.error;
+export const getAuthErrors = () => (state) => state.users.authError;
 
 export default usersReducer;

@@ -4,11 +4,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getIsLoggedIn, loadUsersList} from '../../store/usersSlice';
 import Avatar from './NavBar/avatar';
 import Basket from './NavBar/basket';
-import Search from './NavBar/search';
+import SearchField from './NavBar/searchField';
 import Menu from './NavBar/menu';
 import Breadcrumbs from './breadcrumbs';
 import HeaderNavigation from './headerNavigation';
-import {getCategory, loadCategoriesList} from '../../store/categoriesSlice';
+import {getCategories, loadCategoriesList} from '../../store/categoriesSlice';
 
 const NavBar = () => {
     const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const NavBar = () => {
     }, []);
 
     const isLoggedIn = useSelector(getIsLoggedIn());
-    const categories = useSelector(getCategory());
+    const categories = useSelector(getCategories());
 
     return (
         <>
@@ -30,7 +30,7 @@ const NavBar = () => {
                         На главную
                     </Link>
                 </div>
-                <Search />
+                <SearchField />
                 {isLoggedIn ? (
                     <>
                         <Basket />
@@ -42,7 +42,7 @@ const NavBar = () => {
                     </Link>
                 )}
             </div>
-            <HeaderNavigation categories={categories} />
+            {categories ? <HeaderNavigation categories={categories} /> : null}
         </>
     );
 };

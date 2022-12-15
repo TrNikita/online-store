@@ -6,7 +6,7 @@ import {
     getProductErrors,
     getProducts,
 } from '../../../store/productsSlice';
-import {getCategory, loadCategoriesList} from '../../../store/categoriesSlice';
+import {getCategories, loadCategoriesList} from '../../../store/categoriesSlice';
 import ProductTableAdmin from './productTableAdmin';
 import {generateCreateError} from '../../../utils/generateCreateError';
 import AdminPanelLoader from '../Loaders/adminPanelLoader';
@@ -17,7 +17,7 @@ const ProductsListAdmin = () => {
         dispatch(loadCategoriesList());
     }, []);
 
-    const categories = useSelector(getCategory());
+    const categories = useSelector(getCategories());
     const products = useSelector(getProducts());
     const createProductError = useSelector(getProductErrors());
 
@@ -32,6 +32,7 @@ const ProductsListAdmin = () => {
         price: '',
         tags: '',
         description: '',
+        imgUrl: '',
     });
 
     const handleCreateProduct = (product) => {
@@ -44,8 +45,9 @@ const ProductsListAdmin = () => {
             [target.name]: target.value,
         }));
     };
-
     if (!products || !categories) return <AdminPanelLoader />;
+
+    console.log('products', products);
     return (
         <div className='overflow-x-auto'>
             <table className='table table-compact w-full'>
@@ -53,6 +55,7 @@ const ProductsListAdmin = () => {
                     <tr>
                         <th>№</th>
                         <th>Image</th>
+                        <th>Image Url</th>
                         <th>Название</th>
                         <th>Категория</th>
                         <th>Бренд</th>
@@ -79,14 +82,17 @@ const ProductsListAdmin = () => {
                     ))}
                     <tr>
                         <td></td>
+                        <td></td>
                         <td>
-                            {/* <input */}
-                            {/*     type='file' */}
-                            {/*     className='file-input file-input-bordered file-input-xs w-full max-w-xs' */}
-                            {/*     value={data.image} */}
-                            {/*     name='image' */}
-                            {/*     onChange={handleChange} */}
-                            {/* /> */}
+                            <input
+                                id='imgUrl'
+                                type='text'
+                                className='input input-bordered input-md w-full max-w-xs'
+                                value={data.imgUrl}
+                                placeholder='Введите url картинки'
+                                name='imgUrl'
+                                onChange={handleChange}
+                            />
                         </td>
                         <td>
                             <input
@@ -192,7 +198,7 @@ const ProductsListAdmin = () => {
                         <td></td>
                         <td>
                             <button
-                                className='btn btn-ghost btn-xs'
+                                className='btn btn-xs'
                                 onClick={() => handleCreateProduct(data)}
                             >
                                 Создать

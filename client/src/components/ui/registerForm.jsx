@@ -4,13 +4,13 @@ import {useParams} from 'react-router-dom';
 import TextFieldAuth from '../common/form/textFieldAuth';
 import CheckBoxField from '../common/form/checkBoxField';
 import DropdownInfo from '../common/form/dropdownInfo';
-import {useDispatch} from 'react-redux';
-import {signUp} from '../../store/usersSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {getAuthErrors, signUp} from '../../store/usersSlice';
 
 const RegisterForm = () => {
     const dispatch = useDispatch();
     const params = useParams();
-    console.log('params', params.admin);
+    const loginError = useSelector(getAuthErrors());
 
     const [data, setData] = useState({
         email: '',
@@ -141,6 +141,11 @@ const RegisterForm = () => {
                             Подтвердить лицензионное соглашение
                             <DropdownInfo text='Лицензионное соглашение' />
                         </CheckBoxField>
+                        {loginError && (
+                            <p className='px-4 text-red-500 text-xs italic'>
+                                {loginError}
+                            </p>
+                        )}
                         <button
                             className='btn btn-primary card'
                             disabled={!isValid}

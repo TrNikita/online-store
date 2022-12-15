@@ -63,7 +63,7 @@ const LoginForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div className='hero'>
-                <div className='hero-content flex-col lg:flex-row-reverse'>
+                <div className='hero-content flex-col'>
                     <div className='text-center lg:text-left'>
                         <h1 className='text-3xl font-bold'>Войти</h1>
                     </div>

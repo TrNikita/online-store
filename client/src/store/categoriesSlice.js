@@ -96,7 +96,7 @@ export const removeCategory = (payload) => async (dispatch) => {
     }
 };
 
-export const getCategory = () => (state) => state.categories.entities;
+export const getCategories = () => (state) => state.categories.entities;
 export const getCategoryErrors = () => (state) => state.categories.error;
 
 export default categoriesReducer;

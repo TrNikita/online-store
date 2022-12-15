@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Search = () => {
+const SearchField = () => {
     return (
         <div className='form-control mx-1'>
             <input
@@ -12,4 +12,4 @@ const Search = () => {
     );
 };
 
-export default Search;
+export default SearchField;
