@@ -1,15 +1,18 @@
+// eslint-disable-next-line no-unused-vars
 import React, {memo, useEffect} from 'react';
 import {Link, useLocation} from 'react-router-dom';
+// eslint-disable-next-line no-unused-vars
 import {useDispatch, useSelector} from 'react-redux';
+// eslint-disable-next-line no-unused-vars
 import {getProducts, loadProductsList} from '../../store/productsSlice';
 import {getCategories} from '../../store/categoriesSlice';
 
 const Breadcrumbs = memo(() => {
     const {pathname} = useLocation();
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(loadProductsList());
-    }, []);
+    // const dispatch = useDispatch();
+    // useEffect(() => {
+    //     dispatch(loadProductsList());
+    // }, []);
     const products = useSelector(getProducts());
     const categories = useSelector(getCategories());
 

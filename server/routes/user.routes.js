@@ -13,11 +13,8 @@ router.patch('/:userId', [
             const errors = validationResult(req);
             if (!errors.isEmpty())
                 return res.status(400).json({
-                    error: {
-                        message: 'INVALID_DATA',
-                        code: 400,
-                        errors: errors.array(),
-                    },
+                    message: 'INVALID_DATA',
+                    errors: errors.array(),
                 });
             const updatedUser = await User.findByIdAndUpdate(
                 req.body._id,

@@ -8,13 +8,14 @@ import SearchField from './NavBar/searchField';
 import Menu from './NavBar/menu';
 import Breadcrumbs from './breadcrumbs';
 import HeaderNavigation from './headerNavigation';
+// eslint-disable-next-line no-unused-vars
 import {getCategories, loadCategoriesList} from '../../store/categoriesSlice';
 
 const NavBar = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(loadUsersList());
-        dispatch(loadCategoriesList());
+        // dispatch(loadCategoriesList());
     }, []);
 
     const isLoggedIn = useSelector(getIsLoggedIn());

@@ -11,10 +11,7 @@ router.post('/', checkAdmin, async (req, res) => {
         // проверка на наличие продукта
         if (existingProduct)
             return res.status(400).json({
-                error: {
-                    message: 'PRODUCT_EXISTS',
-                    code: 400,
-                },
+                message: 'PRODUCT_EXISTS',
             });
 
         const newProduct = await Product.create({
@@ -48,11 +45,8 @@ router.patch('/:productId', [
             const errors = validationResult(req);
             if (!errors.isEmpty())
                 return res.status(400).json({
-                    error: {
-                        message: 'INVALID_DATA',
-                        code: 400,
-                        errors: errors.array(),
-                    },
+                    message: 'INVALID_DATA',
+                    errors: errors.array(),
                 });
             const updatedProduct = await Product.findByIdAndUpdate(
                 req.body._id,
@@ -74,7 +68,9 @@ router.delete('/:productId', checkAdmin, async (req, res) => {
         const {productId} = req.params;
         const removedProduct = await Product.findById(productId);
         removedProduct.remove();
-        res.status(201).send({message: `Product ${removedProduct.name} deleted`});
+        res.status(201).send({
+            message: `Product ${removedProduct.name} deleted`,
+        });
     } catch (e) {
         res.status(500).json({
             message: e.message,

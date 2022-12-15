@@ -1,21 +1,15 @@
 import {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {
-    getIsLoggedIn,
-    getUsersLoadingStatus,
-    loadUsersList,
-} from '../../../store/usersSlice';
+import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
+import {loadProductsList} from '../../../store/productsSlice';
+import {loadCategoriesList} from '../../../store/categoriesSlice';
 
 const AppLoader = ({children}) => {
     const dispatch = useDispatch();
-    const isLoggedIn = useSelector(getIsLoggedIn());
-    const usersStatusLoading = useSelector(getUsersLoadingStatus());
-    console.log('usersStatusLoading', usersStatusLoading);
     useEffect(() => {
-        if (isLoggedIn) dispatch(loadUsersList());
-    }, [isLoggedIn]);
-    if (usersStatusLoading) return 'loading';
+        dispatch(loadProductsList());
+        dispatch(loadCategoriesList());
+    }, []);
     return children;
 };
 

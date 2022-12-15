@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 
 const ProductCard = ({products, categories}) => {
     console.log('categories', categories);
-    console.log('products', products[0].tags);
+
+    const windowInnerWidth = document.documentElement.clientWidth;
+    // todo вынести в отдельный конфиг данный показатель
+
     return (
         <>
             {products.map((p) => (
@@ -14,15 +17,17 @@ const ProductCard = ({products, categories}) => {
                             <tr>
                                 <td className='w-3/5'>
                                     <div className='flex items-center space-x-3 text-start'>
-                                        <Link to={`/products/${p._id}`}>
-                                            <div className='w-36 flex justify-center hover:transition ease-in-out delay-150 hover:scale-110 hover:duration-500'>
-                                                <img
-                                                    className='mask mask-squircle max-h-28'
-                                                    src={p.imgUrl}
-                                                    alt='img'
-                                                />
-                                            </div>
-                                        </Link>
+                                        {windowInnerWidth > 750 ? (
+                                            <Link to={`/products/${p._id}`}>
+                                                <div className='w-36 flex justify-center hover:transition ease-in-out delay-150 hover:scale-110 hover:duration-300'>
+                                                    <img
+                                                        className='mask mask-squircle max-h-28'
+                                                        src={p.imgUrl}
+                                                        alt='img'
+                                                    />
+                                                </div>
+                                            </Link>
+                                        ) : null}
                                         <div>
                                             <div className='flex'>
                                                 <Link to={`/products/${p._id}`}>
@@ -57,7 +62,9 @@ const ProductCard = ({products, categories}) => {
                                     </div>
                                 </td>
                                 <td className='text-xs break-normal whitespace-pre-wrap w-1/5 m-1 p-1'>
-                                    {p.description}
+                                    {windowInnerWidth > 750
+                                        ? p.description
+                                        : null}
                                 </td>
                                 <th className='w-1/5'>
                                     <div className='flex m-2 justify-center'>
@@ -90,7 +97,14 @@ const ProductCard = ({products, categories}) => {
                                             </>
                                         ) : null}
                                     </div>
-                                    <button className='btn btn-wide'>
+                                    <button
+                                        className={
+                                            'btn hover:transition ease-in-out delay-50 hover:scale-105 hover:duration-150 hover:text-accent' +
+                                            (windowInnerWidth > 750
+                                                ? ' btn-wide'
+                                                : null)
+                                        }
+                                    >
                                         В корзину
                                     </button>
                                 </th>

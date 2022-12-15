@@ -52,20 +52,14 @@ const {
     productsRequested,
     productsReceived,
     productsRequestFailed,
-    // eslint-disable-next-line no-unused-vars
     productCreatedSuccess,
-    // eslint-disable-next-line no-unused-vars
     productCreatedFailed,
-    // eslint-disable-next-line no-unused-vars
     productRemovedFailed,
-    // eslint-disable-next-line no-unused-vars
     productRemovedSuccess,
     productUpdateSuccessed,
 } = actions;
 
-// eslint-disable-next-line no-unused-vars
 const productCreateRequested = createAction('products/productCreateRequested');
-// eslint-disable-next-line no-unused-vars
 const productRemoveRequested = createAction('products/productRemoveRequested');
 const productUpdateRequested = createAction('products/productUpdateRequested');
 const productUpdateFailed = createAction('products/productUpdateFailed');
