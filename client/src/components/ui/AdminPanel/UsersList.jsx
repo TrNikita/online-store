@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {getUsersList} from '../../../store/usersSlice';
 import {useSelector} from 'react-redux';
-import UserTable from './userTable';
+import UserTable from './UserTable';
 
 const UsersList = () => {
     const users = useSelector(getUsersList());

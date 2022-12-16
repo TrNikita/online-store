@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {removeUser, updateUser} from '../../../store/usersSlice';
 import {useDispatch} from 'react-redux';
-import TextFieldAdminPanel from '../../common/form/textFieldAdminPanel';
+import TextFieldAdminPanel from '../../common/form/TextFieldAdminPanel';
 import {dateAfterPost} from '../../../utils/dateAfterPost';
 
 const UserTable = ({user, index}) => {

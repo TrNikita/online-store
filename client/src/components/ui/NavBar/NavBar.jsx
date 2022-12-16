@@ -1,21 +1,16 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-import {getIsLoggedIn, loadUsersList} from '../../store/usersSlice';
-import Avatar from './NavBar/avatar';
-import Basket from './NavBar/basket';
-import SearchField from './NavBar/searchField';
-import Menu from './NavBar/menu';
-import Breadcrumbs from './breadcrumbs';
-import HeaderNavigation from './headerNavigation';
-import {getCategories} from '../../store/categoriesSlice';
+import {useSelector} from 'react-redux';
+import {getIsLoggedIn} from '../../../store/usersSlice';
+import NavBarAvatar from './NavBarAvatar';
+import NavBarBasket from './NavBarBasket';
+import NavBarSearchField from './NavBarSearchField';
+import NavBarMenu from './NavBarMenu';
+import Breadcrumbs from '../Breadcrumbs';
+import HeaderNavigation from '../HeaderNavigation';
+import {getCategories} from '../../../store/categoriesSlice';
 
 const NavBar = () => {
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(loadUsersList());
-    }, []);
-
     const isLoggedIn = useSelector(getIsLoggedIn());
     const categories = useSelector(getCategories());
 
@@ -23,17 +18,17 @@ const NavBar = () => {
         <>
             <Breadcrumbs />
             <div className='navbar bg-base-100'>
-                <Menu />
+                <NavBarMenu />
                 <div className='flex-1'>
                     <Link to='/' className='btn btn-ghost normal-case text-xl'>
                         На главную
                     </Link>
                 </div>
-                <SearchField />
+                <NavBarSearchField />
                 {isLoggedIn ? (
                     <>
-                        <Basket />
-                        <Avatar />
+                        <NavBarBasket />
+                        <NavBarAvatar />
                     </>
                 ) : (
                     <Link to='login' className='btn'>

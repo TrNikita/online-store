@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Basket = () => {
+const NavBarBasket = () => {
     return (
         <>
             <div className='flex-none'>
@@ -47,4 +47,4 @@ const Basket = () => {
     );
 };
 
-export default Basket;
+export default NavBarBasket;

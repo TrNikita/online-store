@@ -1,19 +1,20 @@
 import React from 'react';
 import {Navigate} from 'react-router-dom';
-import HomePage from '../components/pages/homePage';
-import ProductsList from '../components/pages/productsList';
-import ProductsLayout from '../layouts/productsLayout';
-import ProductPage from '../components/pages/productPage';
-import ProductEditPage from '../components/pages/productEditPage';
-import Login from '../layouts/login';
-import RegisterForm from '../components/ui/registerForm';
-import LogOut from '../layouts/logOut';
-import AdminPanel from '../layouts/adminPanel';
-import UsersList from '../components/ui/AdminPanel/usersList';
-import CategoriesList from '../components/ui/AdminPanel/categoriesList';
-import ProductsListAdmin from '../components/ui/AdminPanel/productsListAdmin';
+import HomePage from '../components/pages/HomePage';
+import ProductsList from '../components/pages/ProductsList';
+import ProductsLayout from '../layouts/ProductsLayout';
+import ProductPage from '../components/pages/ProductPage';
+import ProductEditPage from '../components/pages/ProductEditPage';
+import Login from '../layouts/Login';
+import RegisterForm from '../components/ui/RegisterForm';
+import LogOut from '../layouts/LogOut';
+import AdminPanel from '../layouts/AdminPanel';
+import UsersList from '../components/ui/AdminPanel/UsersList';
+import CategoriesList from '../components/ui/AdminPanel/CategoriesList';
+import ProductsListAdmin from '../components/ui/AdminPanel/ProductsListAdmin';
+import ProtectedRoute from '../components/common/ProtectedRoute';
 
-const routes = [
+const routes = () => [
     {
         path: '',
         element: <HomePage />,
@@ -30,7 +31,7 @@ const routes = [
     },
     {
         path: 'AdminPanel',
-        element: <AdminPanel />,
+        element: <ProtectedRoute element={<AdminPanel />} />,
         children: [
             {
                 path: '',

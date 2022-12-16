@@ -6,12 +6,10 @@ import {
     getProductErrors,
     getProducts,
 } from '../../../store/productsSlice';
-import {
-    getCategories,
-} from '../../../store/categoriesSlice';
-import ProductTableAdmin from './productTableAdmin';
+import {getCategories} from '../../../store/categoriesSlice';
+import ProductTableAdmin from './ProductTableAdmin';
 import {generateCreateError} from '../../../utils/generateCreateError';
-import AdminPanelLoader from '../Loaders/adminPanelLoader';
+import AdminPanelLoader from '../Loaders/AdminPanelLoader';
 
 const ProductsListAdmin = () => {
     const dispatch = useDispatch();

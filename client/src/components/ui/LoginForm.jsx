@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {validator} from '../../utils/validator';
-import TextFieldAuth from '../common/form/textFieldAuth';
+import TextFieldAuth from '../common/form/TextFieldAuth';
 import {useDispatch, useSelector} from 'react-redux';
 import {getAuthErrors, login} from '../../store/usersSlice';
 

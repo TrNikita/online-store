@@ -3,8 +3,6 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const ProductCard = ({products, categories}) => {
-    console.log('categories', categories);
-
     const windowInnerWidth = document.documentElement.clientWidth;
     // todo вынести в отдельный конфиг данный показатель
 
@@ -61,11 +59,11 @@ const ProductCard = ({products, categories}) => {
                                         </div>
                                     </div>
                                 </td>
-                                <td className='text-xs break-normal whitespace-pre-wrap w-1/5 m-1 p-1'>
-                                    {windowInnerWidth > 750
-                                        ? p.description
-                                        : null}
-                                </td>
+                                {windowInnerWidth > 750 ? (
+                                    <td className='text-xs break-normal whitespace-pre-wrap w-1/5 m-1 p-1'>
+                                        {p.description}
+                                    </td>
+                                ) : null}
                                 <th className='w-1/5'>
                                     <div className='flex m-2 justify-center'>
                                         <p

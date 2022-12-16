@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Menu = () => {
+const NavBarMenu = () => {
     return (
         <div className='dropdown'>
             <label tabIndex={0} className='btn btn-ghost btn-circle'>
@@ -37,4 +37,4 @@ const Menu = () => {
     );
 };
 
-export default Menu;
+export default NavBarMenu;

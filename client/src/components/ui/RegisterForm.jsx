@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {validator} from '../../utils/validator';
 import {useParams} from 'react-router-dom';
-import TextFieldAuth from '../common/form/textFieldAuth';
-import CheckBoxField from '../common/form/checkBoxField';
-import DropdownInfo from '../common/form/dropdownInfo';
+import TextFieldAuth from '../common/form/TextFieldAuth';
+import CheckBoxField from '../common/form/CheckBoxField';
+import DropdownInfo from '../common/form/DropdownInfo';
 import {useDispatch, useSelector} from 'react-redux';
 import {getAuthErrors, signUp} from '../../store/usersSlice';
 

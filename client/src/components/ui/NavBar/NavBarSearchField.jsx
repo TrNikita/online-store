@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SearchField = () => {
+const NavBarSearchField = () => {
     return (
         <div className='form-control mx-1'>
             <input
@@ -12,4 +12,4 @@ const SearchField = () => {
     );
 };
 
-export default SearchField;
+export default NavBarSearchField;

@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import TextFieldAdminPanel from '../../common/form/textFieldAdminPanel';
+import TextFieldAdminPanel from '../../common/form/TextFieldAdminPanel';
 import {dateAfterPost} from '../../../utils/dateAfterPost';
-import SelectFieldAdminPanel from '../../common/form/selectFieldAdminPanel';
+import SelectFieldAdminPanel from '../../common/form/SelectFieldAdminPanel';
 import {useDispatch} from 'react-redux';
 import {removeProduct, updateProduct} from '../../../store/productsSlice';
 

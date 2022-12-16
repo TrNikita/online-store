@@ -138,7 +138,7 @@ export const signUp = (payload) => async (dispatch) => {
 export const logOut = () => (dispatch) => {
     localStorageService.removeAuthData();
     dispatch(userLoggedOut());
-    history.push('/');
+    history.replace('/');
 };
 
 export const loadUsersList = () => async (dispatch) => {

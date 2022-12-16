@@ -1,18 +1,12 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-import {getCurrentUserData, loadUsersList} from '../../../store/usersSlice';
+import {useSelector} from 'react-redux';
+import {getCurrentUserData} from '../../../store/usersSlice';
 import {letters} from '../../../utils/letters';
-import AvatarLoader from '../Loaders/avatarLoader';
+import AvatarLoader from '../Loaders/AvatarLoader';
 
-const Avatar = () => {
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(loadUsersList());
-    }, []);
-
+const NavBarAvatar = () => {
     const user = useSelector(getCurrentUserData());
 
     const getAvatarClasses = () => {
@@ -50,8 +44,8 @@ const Avatar = () => {
     );
 };
 
-Avatar.propTypes = {
+NavBarAvatar.propTypes = {
     user: PropTypes.object,
 };
 
-export default Avatar;
+export default NavBarAvatar;
