@@ -17,11 +17,14 @@ const NavBar = () => {
     return (
         <>
             <Breadcrumbs />
-            <div className='navbar bg-base-100'>
+            <div className='navbar bg-base-100 sticky top-0 z-50 border-b'>
                 <NavBarMenu />
                 <div className='flex-1'>
-                    <Link to='/' className='btn btn-ghost normal-case text-xl'>
-                        На главную
+                    <Link
+                        to='products'
+                        className='btn btn-ghost normal-case text-xl'
+                    >
+                        Каталог
                     </Link>
                 </div>
                 <NavBarSearchField />

@@ -8,9 +8,6 @@ const HomePage = () => {
     }
 
     console.log('darkMode', darkMode);
-
-    const root = window.dataset;
-    console.log('root', root);
     return (
         <>
             <div>

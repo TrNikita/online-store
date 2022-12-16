@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 const ProductCard = ({products, categories}) => {
     const windowInnerWidth = document.documentElement.clientWidth;
-    // todo вынести в отдельный конфиг данный показатель
 
     return (
         <>
@@ -59,7 +58,7 @@ const ProductCard = ({products, categories}) => {
                                         </div>
                                     </div>
                                 </td>
-                                {windowInnerWidth > 750 ? (
+                                {windowInnerWidth > 1000 ? (
                                     <td className='text-xs break-normal whitespace-pre-wrap w-1/5 m-1 p-1'>
                                         {p.description}
                                     </td>

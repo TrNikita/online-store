@@ -1,7 +1,7 @@
 import React from 'react';
 import {Navigate} from 'react-router-dom';
 import HomePage from '../components/pages/HomePage';
-import ProductsList from '../components/pages/ProductsList';
+import ProductsListPage from '../components/pages/ProductsListPage';
 import ProductsLayout from '../layouts/ProductsLayout';
 import ProductPage from '../components/pages/ProductPage';
 import ProductEditPage from '../components/pages/ProductEditPage';
@@ -63,7 +63,7 @@ const routes = () => [
     },
     {
         path: ':categoryId',
-        element: <ProductsList />,
+        element: <ProductsListPage />,
         children: [
             {
                 path: '*',
@@ -75,7 +75,7 @@ const routes = () => [
         path: 'products',
         element: <ProductsLayout />,
         children: [
-            {path: '', element: <ProductsList />},
+            {path: '', element: <ProductsListPage />},
             {
                 path: ':productId',
                 children: [
