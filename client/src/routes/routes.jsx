@@ -4,7 +4,6 @@ import HomePage from '../components/pages/HomePage';
 import ProductsListPage from '../components/pages/ProductsListPage';
 import ProductsLayout from '../layouts/ProductsLayout';
 import ProductPage from '../components/pages/ProductPage';
-import ProductEditPage from '../components/pages/ProductEditPage';
 import Login from '../layouts/Login';
 import RegisterForm from '../components/ui/RegisterForm';
 import LogOut from '../layouts/LogOut';
@@ -78,10 +77,7 @@ const routes = () => [
             {path: '', element: <ProductsListPage />},
             {
                 path: ':productId',
-                children: [
-                    {path: '', element: <ProductPage />},
-                    {path: 'edit', element: <ProductEditPage />},
-                ],
+                element: <ProductPage />,
             },
             {path: '*', element: <Navigate to='' />},
         ],

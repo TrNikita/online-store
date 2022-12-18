@@ -50,7 +50,7 @@ const ProductCard = ({products, categories}) => {
                                                 {
                                                     categories.find(
                                                         (c) =>
-                                                            c.name ===
+                                                            c._id ===
                                                             p.category,
                                                     )?.name
                                                 }
@@ -96,7 +96,7 @@ const ProductCard = ({products, categories}) => {
                                     </div>
                                     <button
                                         className={
-                                            'btn hover:transition ease-in-out delay-50 hover:scale-105 hover:duration-150 hover:text-accent' +
+                                            'btn hover:text-accent' +
                                             (windowInnerWidth > 750
                                                 ? ' btn-wide'
                                                 : null)

@@ -1,38 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {extractUniqueValueByKey} from '../../../utils/extractUniqueValueByKey';
 
-const FilterTable123 = ({
+const FilterTableDELETE = ({
     items,
-    handleChange,
-    contentProperty,
-    valueProperty,
     filterKeys,
-    checkedValueId,
+    handleChange,
+    valueProperty,
+    checkedValue,
 }) => {
+    const valuesToFilter = extractUniqueValueByKey(items, filterKeys.key);
     return (
         <div>
             <h1 className='font-bold text-center'>{filterKeys.name}</h1>
             <div className='form-control'>
-                {items.map((item) => (
+                {valuesToFilter.map((item) => (
                     <label
                         key={item[valueProperty]}
                         className='label cursor-pointer'
                     >
                         <span className='label-text text-xs px-3 hover:text-accent'>
-                            {item[contentProperty]}
+                            {item[valueProperty]}
                         </span>
                         <input
                             type='checkbox'
-                            onChange={() => handleChange(item[valueProperty])}
+                            onChange={() =>
+                                handleChange(
+                                    item[valueProperty],
+                                    filterKeys.key,
+                                )
+                            }
                             className='checkbox checkbox-sm'
                             checked={
-                                checkedValueId
-                                    ? checkedValueId === item._id
+                                checkedValue
+                                    ? checkedValue === item._id
                                     : null
                             }
                             disabled={
-                                checkedValueId
-                                    ? checkedValueId !== item._id
+                                checkedValue
+                                    ? checkedValue !== item._id
                                     : null
                             }
                         />
@@ -43,18 +49,16 @@ const FilterTable123 = ({
     );
 };
 
-FilterTable123.defaultProps = {
+FilterTableDELETE.defaultProps = {
     valueProperty: '_id',
-    contentProperty: 'name',
 };
 
-FilterTable123.propTypes = {
+FilterTableDELETE.propTypes = {
     items: PropTypes.array.isRequired,
     handleChange: PropTypes.func.isRequired,
-    contentProperty: PropTypes.string.isRequired,
-    valueProperty: PropTypes.string.isRequired,
     filterKeys: PropTypes.object,
-    checkedValueId: PropTypes.string,
+    valueProperty: PropTypes.string.isRequired,
+    checkedValue: PropTypes.string,
 };
 
-export default FilterTable123;
+export default FilterTableDELETE;

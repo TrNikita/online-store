@@ -1,44 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {extractUniqueValueByKey} from '../../../utils/extractUniqueValueByKey';
 
 const FilterTable = ({
     items,
-    filterKeys,
     handleChange,
+    contentProperty,
     valueProperty,
-    checkedValue,
+    filterKeys,
+    checkedValueId,
 }) => {
-    const valuesToFilter = extractUniqueValueByKey(items, filterKeys.key);
     return (
         <div>
             <h1 className='font-bold text-center'>{filterKeys.name}</h1>
             <div className='form-control'>
-                {valuesToFilter.map((item) => (
+                {items.map((item) => (
                     <label
                         key={item[valueProperty]}
                         className='label cursor-pointer'
                     >
                         <span className='label-text text-xs px-3 hover:text-accent'>
-                            {item[valueProperty]}
+                            {item[contentProperty]}
                         </span>
                         <input
                             type='checkbox'
-                            onChange={() =>
-                                handleChange(
-                                    item[valueProperty],
-                                    filterKeys.key,
-                                )
-                            }
+                            onChange={() => handleChange(item[valueProperty])}
                             className='checkbox checkbox-sm'
                             checked={
-                                checkedValue
-                                    ? checkedValue === item._id
+                                checkedValueId
+                                    ? checkedValueId === item._id
                                     : null
                             }
                             disabled={
-                                checkedValue
-                                    ? checkedValue !== item._id
+                                checkedValueId
+                                    ? checkedValueId !== item._id
                                     : null
                             }
                         />
@@ -51,14 +45,16 @@ const FilterTable = ({
 
 FilterTable.defaultProps = {
     valueProperty: '_id',
+    contentProperty: 'name',
 };
 
 FilterTable.propTypes = {
     items: PropTypes.array.isRequired,
     handleChange: PropTypes.func.isRequired,
-    filterKeys: PropTypes.object,
+    contentProperty: PropTypes.string.isRequired,
     valueProperty: PropTypes.string.isRequired,
-    checkedValue: PropTypes.string,
+    filterKeys: PropTypes.object,
+    checkedValueId: PropTypes.string,
 };
 
 export default FilterTable;

@@ -1,24 +1,45 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import PropTypes from 'prop-types';
+
 import {useSelector} from 'react-redux';
-import {useParams} from 'react-router-dom';
+import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import {getProducts} from '../../store/productsSlice';
 import {getCategories} from '../../store/categoriesSlice';
 import ProductCard from '../ui/ProductCard';
 import Pagination from '../common/table/Pagination';
 import FilterTable from '../common/table/FilterTable';
 import {paginate} from '../../utils/paginate';
+import {extractUniqueValueByKey} from '../../utils/extractUniqueValueByKey';
+import SearchTable from '../common/table/SearchTable';
 
 const ProductsListPage = () => {
     const params = useParams();
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const products = useSelector(getProducts());
     const categories = useSelector(getCategories());
 
-    const categoryIdByParams = products
-        ? categories.find((c) => c.path === params.categoryId)?.name
-        : null;
+    // поиск
+    const [searchQuery, setSearchQuery] = useState(location?.state);
+
+    useEffect(() => {
+        setSearchQuery(location?.state);
+    }, [location.state]);
+
+    const handleClearSearchQuery = () => {
+        navigate('/products');
+    };
+
+    const categoriesKeys = {key: 'category', name: 'Категории'};
+    const brandsKeys = {key: 'brand', name: 'Бренды'};
+    const yearsKeys = {key: 'year', name: 'Год'};
 
     // проверка по params
+    const categoryIdByParams = products
+        ? categories.find((c) => c.path === params.categoryId)?._id
+        : null;
+
     function sortedByCategory(products) {
         if (params.categoryId) {
             const categoryId = categories.find(
@@ -32,63 +53,38 @@ const ProductsListPage = () => {
         return products;
     }
 
-    const categoriesKeys = {key: 'category', name: 'Категории'};
-    const brandsKeys = {key: 'brand', name: 'Бренды'};
-    const yearsKeys = {key: 'year', name: 'Год'};
-
-    const [selectedProduct, setSelectedProduct] = useState([]);
-
-    const handleFilterChange = (item, key) => {
-        const selectedKey = {};
-        selectedKey[key] = [item];
-
-        const index = selectedProduct.findIndex((p) => {
-            return Object.keys(p).toString() === key;
+    // фильтр по категориям
+    const [selectedCategory, setSelectedCategory] = useState([]);
+    const handleFilterChangeByCategory = (item) => {
+        setSelectedCategory((prevState) => {
+            const findIndexInItems = prevState.findIndex((i) => i === item);
+            return findIndexInItems !== -1
+                ? prevState.filter((i) => i !== item)
+                : [...prevState, item];
         });
-
-        if (index === -1)
-            return setSelectedProduct((prevState) => [
-                ...prevState,
-                selectedKey,
-            ]);
-
-        if (index > -1) {
-            const arrayOfValues = Object.values(selectedProduct[index])[0];
-
-            if (!arrayOfValues.includes(item)) {
-                console.log('a');
-                arrayOfValues.push(item);
-                selectedKey[key] = arrayOfValues;
-                const newSelectedProduct = selectedProduct.slice();
-                newSelectedProduct[index] = selectedKey;
-                return setSelectedProduct(newSelectedProduct);
-            }
-            if (arrayOfValues.includes(item)) {
-                selectedKey[key] = arrayOfValues.filter((i) => i !== item);
-                if (Object.values(selectedKey).toString()) {
-                    console.log('b');
-                    const newSelectedProduct = selectedProduct.slice();
-                    newSelectedProduct[index] = selectedKey;
-                    console.log('newSelectedProduct', newSelectedProduct);
-                    return setSelectedProduct(newSelectedProduct);
-                } else if (!Object.values(selectedKey).toString()) {
-                    console.log('c');
-                    const newSelectedProduct = selectedProduct.slice();
-                    console.log('newSelectedProduct', newSelectedProduct);
-                    console.log(
-                        'newSelectedProduct[index]',
-                        newSelectedProduct[index],
-                    );
-                }
-            }
-        }
     };
 
-    // // поиск
-    // const [searchQuery, setSearchQuery] = useState('');
-    // const handleSearchQuery = ({target}) => {
-    //     setSearchQuery(target.value);
-    // };
+    // фильтр по брендам
+    const [selectedBrand, setSelectedBrand] = useState([]);
+    const handleFilterChangeByBrand = (item) => {
+        setSelectedBrand((prevState) => {
+            const findIndexInItems = prevState.findIndex((i) => i === item);
+            return findIndexInItems !== -1
+                ? prevState.filter((i) => i !== item)
+                : [...prevState, item];
+        });
+    };
+
+    // фильтр по годам
+    const [selectedYear, setSelectedYear] = useState([]);
+    const handleFilterChangeByYear = (item) => {
+        setSelectedYear((prevState) => {
+            const findIndexInItems = prevState.findIndex((i) => i === item);
+            return findIndexInItems !== -1
+                ? prevState.filter((i) => i !== item)
+                : [...prevState, item];
+        });
+    };
 
     // страницы
     const [currentPage, setCurrentPage] = useState(1);
@@ -98,65 +94,98 @@ const ProductsListPage = () => {
     };
 
     if (products && categories) {
+        // фильтр по поиску
+        const searchProducts = searchQuery?.value[0]
+            ? searchQuery.value
+            : products;
+
         // фильтр по params
-        const productsSortedByCategory = sortedByCategory(products);
+        const productsSortedByCategory = sortedByCategory(searchProducts);
 
-        const productsWithCategoriesNames = productsSortedByCategory.map(
-            (p) => {
-                const category = categories.find((c) => c._id === p.category);
-                return {...p, category: category.name};
-            },
+        // по фильтру категории
+        const selectedProductsByCategories =
+            selectedCategory.length === 0
+                ? productsSortedByCategory
+                : productsSortedByCategory.filter((p) =>
+                      selectedCategory.includes(p.category),
+                  );
+
+        // только бренды
+        const brands = extractUniqueValueByKey(
+            selectedProductsByCategories,
+            'brand',
         );
 
-        const filteredProducts = productsWithCategoriesNames.filter(
-            (product) => {
-                return selectedProduct.every((filter) => {
-                    // проходимся по каждому продукту столько раз, сколько ключей в фильтре, необходимо, чтобы каждый выдал true
-                    return Object.values(filter)[0].includes(
-                        // Object.values(filter) = например ['2022', '2021']; Object.keys(filter) = например 'year';
-                        product[Object.keys(filter)],
-                    );
-                });
-            },
+        // добавляем фильтр по брендам
+        const selectedProductsByCategoriesAndBrands =
+            selectedBrand.length === 0
+                ? selectedProductsByCategories
+                : selectedProductsByCategories.filter((p) =>
+                      selectedBrand.includes(p.brand),
+                  );
+
+        // только год
+        const years = extractUniqueValueByKey(
+            selectedProductsByCategoriesAndBrands,
+            'year',
         );
+
+        // добавляем фильтр по годам
+        const selectedProductsByCategoriesAndBrandsAndYears =
+            selectedYear.length === 0
+                ? selectedProductsByCategoriesAndBrands
+                : selectedProductsByCategoriesAndBrands.filter((p) =>
+                      selectedYear.includes(p.year),
+                  );
 
         const selectProductsCrop = paginate(
-            filteredProducts,
+            selectedProductsByCategoriesAndBrandsAndYears,
             currentPage,
             pageSize,
         );
-        console.log('filter', filteredProducts);
+
+        const itemsCount =
+            selectedProductsByCategoriesAndBrandsAndYears?.length;
 
         return (
             <>
                 <div className='flex'>
                     <div className='w-1/5 border'>
                         <FilterTable
-                            items={productsWithCategoriesNames}
+                            items={categories}
                             filterKeys={categoriesKeys}
-                            handleChange={handleFilterChange}
-                            checkedValue={categoryIdByParams}
+                            handleChange={handleFilterChangeByCategory}
+                            checkedValueId={categoryIdByParams}
                         />
                         <FilterTable
                             filterKeys={brandsKeys}
-                            items={productsWithCategoriesNames}
-                            handleChange={handleFilterChange}
+                            items={brands}
+                            handleChange={handleFilterChangeByBrand}
                         />
                         <FilterTable
                             filterKeys={yearsKeys}
-                            items={productsWithCategoriesNames}
-                            handleChange={handleFilterChange}
+                            items={years}
+                            handleChange={handleFilterChangeByYear}
                         />
                     </div>
-                    <div>
-                        <ProductCard
-                            products={selectProductsCrop}
-                            categories={categories}
-                        />
+                    <div className='flex-col'>
+                        {searchQuery?.key ? (
+                            <SearchTable
+                                searchQuery={searchQuery}
+                                handleClearSearchQuery={handleClearSearchQuery}
+                            />
+                        ) : null}
+
+                        <div>
+                            <ProductCard
+                                products={selectProductsCrop}
+                                categories={categories}
+                            />
+                        </div>
                     </div>
                 </div>
                 <Pagination
-                    itemsCount={filteredProducts.length}
+                    itemsCount={itemsCount}
                     pageSize={pageSize}
                     currentPage={currentPage}
                     onPageChange={handlePageChange}
@@ -164,6 +193,10 @@ const ProductsListPage = () => {
             </>
         );
     }
+};
+
+ProductsListPage.propTypes = {
+    productsFromSearch: PropTypes.array,
 };
 
 export default ProductsListPage;
