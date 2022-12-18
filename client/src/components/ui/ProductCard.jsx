@@ -50,7 +50,7 @@ const ProductCard = ({products, categories}) => {
                                                 {
                                                     categories.find(
                                                         (c) =>
-                                                            c._id ===
+                                                            c.name ===
                                                             p.category,
                                                     )?.name
                                                 }
