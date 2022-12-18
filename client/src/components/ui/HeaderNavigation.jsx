@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {Link, useLocation} from 'react-router-dom';
 
 const HeaderNavigation = ({categories}) => {
-    // eslint-disable-next-line no-unused-vars
     const getClasses = (link) => {
         const {pathname} = useLocation();
         const activeLink = pathname.split('/');

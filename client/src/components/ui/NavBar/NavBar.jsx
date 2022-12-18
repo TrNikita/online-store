@@ -5,10 +5,11 @@ import {getIsLoggedIn} from '../../../store/usersSlice';
 import NavBarAvatar from './NavBarAvatar';
 import NavBarBasket from './NavBarBasket';
 import NavBarSearchField from './NavBarSearchField';
-import NavBarMenu from './NavBarMenu';
 import Breadcrumbs from '../Breadcrumbs';
 import HeaderNavigation from '../HeaderNavigation';
 import {getCategories} from '../../../store/categoriesSlice';
+import HeaderNavigationLoader from '../Loaders/HeaderNavigationLoader';
+import NavBarMenu from './NavBarMenu';
 
 const NavBar = () => {
     const isLoggedIn = useSelector(getIsLoggedIn());
@@ -39,7 +40,11 @@ const NavBar = () => {
                     </Link>
                 )}
             </div>
-            {categories ? <HeaderNavigation categories={categories} /> : null}
+            {categories ? (
+                <HeaderNavigation categories={categories} />
+            ) : (
+                <HeaderNavigationLoader />
+            )}
         </>
     );
 };

@@ -9,7 +9,7 @@ const NavBarSearchField = () => {
     const [searchQuery, setSearchQuery] = useState('');
 
     const handleSearchQuery = ({target}) => {
-        setSearchQuery(target.value);
+        return products ? setSearchQuery(target.value) : null;
     };
 
     const handleSubmit = (e) => {

@@ -3,6 +3,7 @@ import {useSelector} from 'react-redux';
 import {getProductById} from '../../store/productsSlice';
 import {useParams} from 'react-router-dom';
 import {getCategories} from '../../store/categoriesSlice';
+import ProductCardLoader from '../ui/Loaders/ProductCardLoader';
 
 const ProductPage = () => {
     const {productId} = useParams();
@@ -81,7 +82,7 @@ const ProductPage = () => {
             </div>
         </>
     ) : (
-        'Loading'
+        <ProductCardLoader/>
     );
 };
 
