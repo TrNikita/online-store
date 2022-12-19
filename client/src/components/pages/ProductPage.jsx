@@ -76,7 +76,7 @@ const ProductPage = () => {
                                 </>
                             ) : null}
                         </div>
-                        <button className='btn btn-primary'>Buy Now</button>
+                        <button className='btn btn-primary'>В корзину</button>
                     </div>
                 </div>
             </div>

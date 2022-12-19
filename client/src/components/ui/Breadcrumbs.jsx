@@ -18,6 +18,7 @@ const Breadcrumbs = memo(() => {
         {adminpanel: 'Панель администратора'},
         {users: 'Пользователи'},
         {categories: 'Категории'},
+        {basket: 'Корзина'},
     ];
 
     const pathWithNames = pathArr.map((path) => {

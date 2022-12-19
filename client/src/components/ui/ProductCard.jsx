@@ -96,7 +96,7 @@ const ProductCard = ({products, categories}) => {
                                     </div>
                                     <button
                                         className={
-                                            'btn hover:text-accent' +
+                                            'btn btn-primary' +
                                             (windowInnerWidth > 750
                                                 ? ' btn-wide'
                                                 : null)

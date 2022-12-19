@@ -1,9 +1,10 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 const NavBarBasket = () => {
     return (
         <>
-            <div className='flex-none'>
+            <div className='flex-none px-1'>
                 <div className='dropdown dropdown-end'>
                     <label tabIndex={0} className='btn btn-ghost btn-circle'>
                         <div className='indicator'>
@@ -36,7 +37,7 @@ const NavBarBasket = () => {
                             <span className='text-info'>Subtotal: $999</span>
                             <div className='card-actions'>
                                 <button className='btn btn-primary btn-block'>
-                                    В корзину
+                                    <Link to='basket'>В корзину</Link>
                                 </button>
                             </div>
                         </div>

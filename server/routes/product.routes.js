@@ -68,7 +68,7 @@ router.delete('/:productId', checkAdmin, async (req, res) => {
         const {productId} = req.params;
         const removedProduct = await Product.findById(productId);
         removedProduct.remove();
-        res.status(201).send({
+        res.status(200).send({
             message: `Product ${removedProduct.name} deleted`,
         });
     } catch (e) {

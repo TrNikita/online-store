@@ -12,6 +12,7 @@ import UsersList from '../components/ui/AdminPanel/UsersList';
 import CategoriesList from '../components/ui/AdminPanel/CategoriesList';
 import ProductsListAdmin from '../components/ui/AdminPanel/ProductsListAdmin';
 import ProtectedRoute from '../components/common/ProtectedRoute';
+import BasketPage from '../components/pages/BasketPage';
 
 const routes = () => [
     {
@@ -81,6 +82,10 @@ const routes = () => [
             },
             {path: '*', element: <Navigate to='' />},
         ],
+    },
+    {
+        path: 'basket',
+        element: <BasketPage />,
     },
     {path: '*', element: <Navigate to='/' />},
 ];
