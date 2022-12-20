@@ -29,8 +29,15 @@ const basketsSlice = createSlice({
         basketAddFailed: (state, action) => {
             state.error = action.payload;
         },
+
+        // todo доделать
         basketRemovedSuccess: (state, action) => {
-            const index = state.entities.findIndex((p) => p === action.payload);
+            console.log('action.payload', action.payload);
+            const {products} = action.payload;
+            console.log('products', products);
+            console.log('state.entities', state.entities.products);
+            const index = state.entities.findIndex((p) => console.log('p', p));
+            console.log('index', index);
             state.entities.splice(index, 1);
         },
         basketRemovedFailed: (state, action) => {
