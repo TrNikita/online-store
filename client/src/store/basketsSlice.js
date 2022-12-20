@@ -22,26 +22,19 @@ const basketsSlice = createSlice({
             state.error = action.payload;
             state.isLoading = false;
         },
-        basketCreatedSuccess: (state, action) => {
+        basketAddSuccess: (state, action) => {
             if (!Array.isArray(state.entities)) state.entities = [];
             state.entities.push(action.payload);
         },
-        basketCreatedFailed: (state, action) => {
-            state.error = action.payload;
-        },
-        basketRemovedFailed: (state, action) => {
+        basketAddFailed: (state, action) => {
             state.error = action.payload;
         },
         basketRemovedSuccess: (state, action) => {
-            const index = state.entities.findIndex(
-                (p) => p._id === action.payload,
-            );
+            const index = state.entities.findIndex((p) => p === action.payload);
             state.entities.splice(index, 1);
         },
-        basketUpdateSuccessed: (state, action) => {
-            state.entities[
-                state.entities.findIndex((p) => p._id === action.payload._id)
-            ] = action.payload;
+        basketRemovedFailed: (state, action) => {
+            state.error = action.payload;
         },
     },
 });
@@ -52,19 +45,16 @@ const {
     basketsRequested,
     basketsReceived,
     basketsRequestFailed,
-    basketCreatedSuccess,
-    basketCreatedFailed,
+    basketAddSuccess,
+    basketAddFailed,
     basketRemovedFailed,
     basketRemovedSuccess,
-    // basketUpdateSuccessed,
 } = actions;
 
-const basketCreateRequested = createAction('baskets/basketCreateRequested');
+const basketAddRequested = createAction('baskets/basketCreateRequested');
 const basketRemoveRequested = createAction('baskets/basketRemoveRequested');
-// const basketUpdateRequested = createAction('baskets/basketUpdateRequested');
-// const basketUpdateFailed = createAction('baskets/basketUpdateFailed');
 
-export const loadBasketsList = () => async (dispatch) => {
+export const loadBasket = () => async (dispatch) => {
     dispatch(basketsRequested());
     try {
         const {content} = await basketService.get();
@@ -76,22 +66,22 @@ export const loadBasketsList = () => async (dispatch) => {
 };
 
 export const addProductToBasket = (payload) => async (dispatch) => {
-    dispatch(basketCreateRequested());
+    dispatch(basketAddRequested());
     try {
-        const {content} = await basketService.create({...payload});
+        console.log('payload', payload);
+        const {content} = await basketService.add(payload);
         console.log('content', content);
-        dispatch(basketCreatedSuccess(content));
-    } catch (error) {
-        console.log('error', error);
-        error.response.data.message
-            ? dispatch(basketCreatedFailed(error.response.data.message))
-            : dispatch(basketCreatedFailed(error.response.data.error.message));
+        dispatch(basketAddSuccess(content.products));
+    } catch (e) {
+        console.log('e', e);
+        dispatch(basketAddFailed(e.message));
     }
 };
 
 export const removeProductFromBasket = (payload) => async (dispatch) => {
     dispatch(basketRemoveRequested());
     try {
+        console.log('payload', payload);
         await basketService.remove(payload);
         dispatch(basketRemovedSuccess(payload));
     } catch (e) {
@@ -99,9 +89,6 @@ export const removeProductFromBasket = (payload) => async (dispatch) => {
     }
 };
 
-export const getBasketByUserId = (userId) => (state) => {
-    if (state.baskets.entities)
-        return state.basket.entities.find((b) => b.userId === userId);
-};
+export const getBasket = () => (state) => state.baskets.entities;
 
 export default basketsReducer;

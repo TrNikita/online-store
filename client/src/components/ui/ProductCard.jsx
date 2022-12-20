@@ -1,9 +1,28 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+    addProductToBasket,
+    removeProductFromBasket,
+    getBasket,
+} from '../../store/basketsSlice';
 
 const ProductCard = ({products, categories}) => {
+    const dispatch = useDispatch();
     const windowInnerWidth = document.documentElement.clientWidth;
+
+    const basket = useSelector(getBasket());
+    console.log('basket', basket);
+
+    const handleClickAdd = async (product) => {
+        const addedProductToBasket = {products: product._id};
+        dispatch(addProductToBasket(addedProductToBasket));
+    };
+    const handleClickRemove = async (product) => {
+        const removedProductFromBasket = {products: product._id};
+        dispatch(removeProductFromBasket(removedProductFromBasket));
+    };
 
     return (
         <>
@@ -95,8 +114,20 @@ const ProductCard = ({products, categories}) => {
                                         ) : null}
                                     </div>
                                     <button
+                                        onClick={() => handleClickAdd(p)}
                                         className={
                                             'btn btn-primary' +
+                                            (windowInnerWidth > 750
+                                                ? ' btn-wide'
+                                                : null)
+                                        }
+                                    >
+                                        В корзину
+                                    </button>
+                                    <button
+                                        onClick={() => handleClickRemove(p)}
+                                        className={
+                                            'btn btn-secondary' +
                                             (windowInnerWidth > 750
                                                 ? ' btn-wide'
                                                 : null)

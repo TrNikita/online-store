@@ -35,11 +35,6 @@ const ProductsListPage = () => {
     const brandsKeys = {key: 'brand', name: 'Бренды'};
     const yearsKeys = {key: 'year', name: 'Год'};
 
-    // проверка по params
-    const categoryIdByParams = products
-        ? categories.find((c) => c.path === params.categoryId)?._id
-        : null;
-
     function sortedByCategory(products) {
         if (params.categoryId) {
             const categoryId = categories.find(
@@ -94,6 +89,11 @@ const ProductsListPage = () => {
     };
 
     if (products && categories) {
+        // проверка по params
+        const categoryIdByParams = products
+            ? categories.find((c) => c.path === params.categoryId)?._id
+            : null;
+
         // фильтр по поиску
         const searchProducts = searchQuery?.value[0]
             ? searchQuery.value

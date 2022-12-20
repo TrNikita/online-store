@@ -22,6 +22,7 @@ router.get('/', auth, async (req, res) => {
 
 router.post('/', auth, async (req, res) => {
     try {
+        console.log('req.body', req.body);
         const list = await Basket.find();
         const userBasket = await list.find((b) => b.userId === req.user._id);
         if (userBasket) {
@@ -48,8 +49,9 @@ router.post('/', auth, async (req, res) => {
     }
 });
 
-router.delete('/', auth, async (req, res) => {
+router.delete('/:productId', auth, async (req, res) => {
     try {
+        const {productId} = req.params;
         const list = await Basket.find();
         const userBasket = await list.find((b) => b.userId === req.user._id);
         if (!userBasket) {
@@ -57,8 +59,10 @@ router.delete('/', auth, async (req, res) => {
         }
 
         const removedProductIndex = await userBasket.products.findIndex(
-            (p) => p === req.body.products,
+            (p) => p === productId,
         );
+
+        console.log('removedProductIndex', removedProductIndex);
 
         if (removedProductIndex > -1) {
             const updatedProducts = userBasket.products.slice();

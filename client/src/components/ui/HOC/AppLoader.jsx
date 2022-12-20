@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {loadProductsList} from '../../../store/productsSlice';
 import {loadCategoriesList} from '../../../store/categoriesSlice';
 import {getIsLoggedIn, loadUsersList} from '../../../store/usersSlice';
-import {loadBasketsList} from '../../../store/basketsSlice';
+import {loadBasket} from '../../../store/basketsSlice';
 
 const AppLoader = ({children}) => {
     const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const AppLoader = ({children}) => {
 
     useEffect(() => {
         dispatch(loadUsersList());
-        dispatch(loadBasketsList());
+        dispatch(loadBasket());
     }, [isLoggedIn]);
 
     useEffect(() => {
