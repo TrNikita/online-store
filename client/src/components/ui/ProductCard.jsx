@@ -24,6 +24,15 @@ const ProductCard = ({products, categories}) => {
         dispatch(removeProductFromBasket(removedProductFromBasket));
     };
 
+    function isProductInBasket(product) {
+        return basket.some((p) => p === product._id);
+    }
+
+    function productsInBasketCount(product) {
+        const productsInBasket = basket?.filter((p) => p === product._id);
+        return productsInBasket.length;
+    }
+
     return (
         <>
             {products.map((p) => (
@@ -113,28 +122,36 @@ const ProductCard = ({products, categories}) => {
                                             </>
                                         ) : null}
                                     </div>
-                                    <button
-                                        onClick={() => handleClickAdd(p)}
-                                        className={
-                                            'btn btn-primary' +
-                                            (windowInnerWidth > 750
-                                                ? ' btn-wide'
-                                                : null)
-                                        }
-                                    >
-                                        В корзину
-                                    </button>
-                                    <button
-                                        onClick={() => handleClickRemove(p)}
-                                        className={
-                                            'btn btn-secondary' +
-                                            (windowInnerWidth > 750
-                                                ? ' btn-wide'
-                                                : null)
-                                        }
-                                    >
-                                        В корзину
-                                    </button>
+                                    {isProductInBasket(p) ? (
+                                        <button
+                                            onClick={() => handleClickRemove(p)}
+                                            className='btn btn-xs badge m-0.5'
+                                        >
+                                            -
+                                        </button>
+                                    ) : null}
+                                    <div className='indicator'>
+                                        <button
+                                            onClick={() => handleClickAdd(p)}
+                                            className={
+                                                (!isProductInBasket(p)
+                                                    ? 'btn btn-primary'
+                                                    : 'btn btn-secondary') +
+                                                (windowInnerWidth > 750
+                                                    ? ' btn-wide'
+                                                    : null)
+                                            }
+                                        >
+                                            {!isProductInBasket(p)
+                                                ? 'В корзину'
+                                                : 'Добавить'}
+                                            {isProductInBasket(p) ? (
+                                                <span className='badge indicator-item'>
+                                                    {productsInBasketCount(p)}
+                                                </span>
+                                            ) : null}
+                                        </button>
+                                    </div>
                                 </th>
                             </tr>
                         </tbody>

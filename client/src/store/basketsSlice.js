@@ -24,7 +24,7 @@ const basketsSlice = createSlice({
         },
         basketAddSuccess: (state, action) => {
             if (!Array.isArray(state.entities)) state.entities = [];
-            state.entities.push(action.payload);
+            state.entities = action.payload;
         },
         basketAddFailed: (state, action) => {
             state.error = action.payload;
@@ -32,12 +32,7 @@ const basketsSlice = createSlice({
 
         // todo доделать
         basketRemovedSuccess: (state, action) => {
-            console.log('action.payload', action.payload);
-            const {products} = action.payload;
-            console.log('products', products);
-            console.log('state.entities', state.entities.products);
-            const index = state.entities.findIndex((p) => console.log('p', p));
-            console.log('index', index);
+            const index = state.entities.findIndex((p) => p === action.payload);
             state.entities.splice(index, 1);
         },
         basketRemovedFailed: (state, action) => {
@@ -65,8 +60,7 @@ export const loadBasket = () => async (dispatch) => {
     dispatch(basketsRequested());
     try {
         const {content} = await basketService.get();
-        console.log('content', content);
-        dispatch(basketsReceived(content));
+        dispatch(basketsReceived(content.products));
     } catch (e) {
         dispatch(basketsRequestFailed(e.message));
     }
@@ -75,9 +69,7 @@ export const loadBasket = () => async (dispatch) => {
 export const addProductToBasket = (payload) => async (dispatch) => {
     dispatch(basketAddRequested());
     try {
-        console.log('payload', payload);
         const {content} = await basketService.add(payload);
-        console.log('content', content);
         dispatch(basketAddSuccess(content.products));
     } catch (e) {
         console.log('e', e);
@@ -88,9 +80,9 @@ export const addProductToBasket = (payload) => async (dispatch) => {
 export const removeProductFromBasket = (payload) => async (dispatch) => {
     dispatch(basketRemoveRequested());
     try {
-        console.log('payload', payload);
         await basketService.remove(payload);
-        dispatch(basketRemovedSuccess(payload));
+        const {products} = payload;
+        dispatch(basketRemovedSuccess(products));
     } catch (e) {
         dispatch(basketRemovedFailed(e.message));
     }

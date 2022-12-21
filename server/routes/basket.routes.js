@@ -52,6 +52,7 @@ router.post('/', auth, async (req, res) => {
 router.delete('/:productId', auth, async (req, res) => {
     try {
         const {productId} = req.params;
+        console.log('productId', productId);
         const list = await Basket.find();
         const userBasket = await list.find((b) => b.userId === req.user._id);
         if (!userBasket) {
@@ -75,7 +76,7 @@ router.delete('/:productId', auth, async (req, res) => {
                     new: true,
                 },
             );
-            console.log('userBasket', userBasket);
+            console.log('updatedBasket', updatedBasket);
             res.status(200).send(updatedBasket);
         } else {
             return res

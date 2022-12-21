@@ -7,13 +7,11 @@ const basketService = {
         return data;
     },
     add: async (payload) => {
-        console.log('payload', payload);
         const {data} = await httpService.post(basketEndpoint, payload);
         return data;
     },
     remove: async ({products}) => {
         const {data} = await httpService.delete(basketEndpoint + products);
-        console.log('data', data);
         return data;
     },
 };
