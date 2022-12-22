@@ -30,7 +30,6 @@ const basketsSlice = createSlice({
             state.error = action.payload;
         },
 
-        // todo доделать
         basketRemovedSuccess: (state, action) => {
             const index = state.entities.findIndex((p) => p === action.payload);
             state.entities.splice(index, 1);

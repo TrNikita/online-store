@@ -87,7 +87,7 @@ const ProductCard = ({products, categories}) => {
                                     </div>
                                 </td>
                                 {windowInnerWidth > 1000 ? (
-                                    <td className='text-xs break-normal whitespace-pre-wrap w-1/5 m-1 p-1'>
+                                    <td className='text-xs break-normal whitespace-pre-wrap w-2/5 m-1 p-1'>
                                         {p.description}
                                     </td>
                                 ) : null}

@@ -2,31 +2,18 @@ import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import {getBasket} from '../../../store/basketsSlice';
+import {totalPrice} from '../../../utils/totalPrice';
 import {getProducts} from '../../../store/productsSlice';
 
 const NavBarBasket = () => {
-    // eslint-disable-next-line no-unused-vars
-    const products = useSelector(getProducts());
-    console.log('products', products);
-
     const basket = useSelector(getBasket());
+    const products = useSelector(getProducts());
+
     const [count, setCount] = useState();
-    // const [totalPrice, setTotalPrice] = useState();
-    //
+
     useEffect(() => {
         setCount(basket?.length);
     }, [basket]);
-
-    const PriceOfProductsInBasket = basket?.map(
-        (b) => products?.find((p) => p._id === b).price,
-    );
-
-    console.log('PriceOfProductsInBasket', PriceOfProductsInBasket);
-    const totalPrice = PriceOfProductsInBasket?.reduce((acc, curr) => {
-        return acc + curr;
-    }, 0);
-
-    console.log('totalPrice', totalPrice);
 
     return (
         <>
@@ -62,11 +49,16 @@ const NavBarBasket = () => {
                     >
                         <div className='card-body'>
                             <span className='font-bold text-lg'>
-                                {count} Items
+                                {count} товаров
                             </span>
 
-                            <span className='text-info'>
-                                Итог: {totalPrice?.toLocaleString()} Р
+                            <span className='text-primary'>
+                                Итог:{' '}
+                                {totalPrice({
+                                    basket,
+                                    products,
+                                })?.toLocaleString()}{' '}
+                                ₽
                             </span>
                             <div className='card-actions'>
                                 <button className='btn btn-primary btn-block'>
