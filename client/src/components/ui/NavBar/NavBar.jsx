@@ -9,7 +9,7 @@ import Breadcrumbs from '../Breadcrumbs';
 import HeaderNavigation from '../HeaderNavigation';
 import {getCategories} from '../../../store/categoriesSlice';
 import HeaderNavigationLoader from '../Loaders/HeaderNavigationLoader';
-import NavBarMenu from './NavBarMenu';
+import ToggleDarkMode from './ToggleDarkMode';
 
 const NavBar = () => {
     const isLoggedIn = useSelector(getIsLoggedIn());
@@ -19,11 +19,11 @@ const NavBar = () => {
         <>
             <Breadcrumbs />
             <div className='navbar bg-base-100 sticky top-0 z-50 border-b'>
-                <NavBarMenu />
                 <div className='flex-1'>
+                    <ToggleDarkMode />
                     <Link
                         to='products'
-                        className='btn btn-ghost normal-case text-xl'
+                        className='btn btn-ghost normal-case text-2xl hover:text-red-500'
                     >
                         Каталог
                     </Link>

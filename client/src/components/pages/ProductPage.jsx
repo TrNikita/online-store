@@ -28,7 +28,7 @@ const ProductPage = () => {
     };
 
     function isProductInBasket(product) {
-        return basket.some((p) => p === product._id);
+        return basket?.some((p) => p === product._id);
     }
 
     function productsInBasketCount(product) {
@@ -42,7 +42,7 @@ const ProductPage = () => {
                 <div className='card card-side flex bg-base-100 shadow-xl'>
                     <div className='py-6 m-4 w-2/5'>
                         <figure>
-                            <img src={product.imgUrl} alt='img' />
+                            <img src={product.imgUrl} alt='img' className='rounded-xl' />
                         </figure>
                     </div>
                     <div className='card-body w-3/5'>

@@ -13,7 +13,6 @@ const ProductCard = ({products, categories}) => {
     const windowInnerWidth = document.documentElement.clientWidth;
 
     const basket = useSelector(getBasket());
-    console.log('basket', basket);
 
     const handleClickAdd = async (product) => {
         const addedProductToBasket = {products: product._id};
@@ -25,7 +24,7 @@ const ProductCard = ({products, categories}) => {
     };
 
     function isProductInBasket(product) {
-        return basket.some((p) => p === product._id);
+        return basket?.some((p) => p === product._id);
     }
 
     function productsInBasketCount(product) {

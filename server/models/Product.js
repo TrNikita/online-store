@@ -24,10 +24,6 @@ const schema = new Schema(
             type: Number,
             required: true,
         },
-        // rate: {
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'Rate',
-        // },
         tags: {
             type: String,
             default: 'New',

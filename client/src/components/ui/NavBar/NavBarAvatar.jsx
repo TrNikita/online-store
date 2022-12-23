@@ -20,7 +20,7 @@ const NavBarAvatar = () => {
 
     const nameLetters = letters(user.name);
     return (
-        <div className='dropdown dropdown-end'>
+        <div className='dropdown dropdown-end mx-1'>
             <div className='avatar placeholder'>
                 <label tabIndex={0} className={getAvatarClasses()}>
                     <span className='text-xl'>{nameLetters}</span>
