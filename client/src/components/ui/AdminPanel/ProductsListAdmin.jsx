@@ -9,7 +9,7 @@ import {
 import {getCategories} from '../../../store/categoriesSlice';
 import ProductTableAdmin from './ProductTableAdmin';
 import {generateCreateError} from '../../../utils/generateCreateError';
-import AdminPanelLoader from '../Loaders/AdminPanelLoader';
+import SpinnerLoader from '../Loaders/SpinnerLoader';
 
 const ProductsListAdmin = () => {
     const dispatch = useDispatch();
@@ -42,7 +42,7 @@ const ProductsListAdmin = () => {
             [target.name]: target.value,
         }));
     };
-    if (!products || !categories) return <AdminPanelLoader />;
+    if (!products || !categories) return <SpinnerLoader />;
 
     return (
         <div className='overflow-x-auto'>

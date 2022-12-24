@@ -33,7 +33,7 @@ const NavBarSearchField = () => {
     });
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='overflow-hidden'>
             <div className='form-control mx-1'>
                 <input
                     type='text'

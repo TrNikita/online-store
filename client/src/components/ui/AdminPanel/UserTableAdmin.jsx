@@ -5,7 +5,7 @@ import {useDispatch} from 'react-redux';
 import TextFieldAdminPanel from '../../common/form/TextFieldAdminPanel';
 import {dateAfterPost} from '../../../utils/dateAfterPost';
 
-const UserTable = ({user, index}) => {
+const UserTableAdmin = ({user, index}) => {
     const dispatch = useDispatch();
 
     const [data, setData] = useState(user);
@@ -61,9 +61,9 @@ const UserTable = ({user, index}) => {
     );
 };
 
-UserTable.propTypes = {
+UserTableAdmin.propTypes = {
     user: PropTypes.object,
     index: PropTypes.number,
 };
 
-export default UserTable;
+export default UserTableAdmin;

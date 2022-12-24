@@ -10,10 +10,13 @@ import HeaderNavigation from '../HeaderNavigation';
 import {getCategories} from '../../../store/categoriesSlice';
 import HeaderNavigationLoader from '../Loaders/HeaderNavigationLoader';
 import ToggleDarkMode from './ToggleDarkMode';
+import {getProducts} from '../../../store/productsSlice';
+import SpinnerLoader from '../Loaders/SpinnerLoader';
 
 const NavBar = () => {
     const isLoggedIn = useSelector(getIsLoggedIn());
     const categories = useSelector(getCategories());
+    const products = useSelector(getProducts());
 
     return (
         <>
@@ -23,7 +26,7 @@ const NavBar = () => {
                     <ToggleDarkMode />
                     <Link
                         to='products'
-                        className='btn btn-ghost normal-case text-2xl hover:text-red-500'
+                        className='btn btn-ghost normal-case text-xl hover:text-red-500'
                     >
                         Каталог
                     </Link>
@@ -45,6 +48,8 @@ const NavBar = () => {
             ) : (
                 <HeaderNavigationLoader />
             )}
+
+            {!categories && !products ? <SpinnerLoader /> : null}
         </>
     );
 };

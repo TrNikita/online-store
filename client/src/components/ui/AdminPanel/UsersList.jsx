@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {getUsersList} from '../../../store/usersSlice';
 import {useSelector} from 'react-redux';
-import UserTable from './UserTable';
+import UserTableAdmin from './UserTableAdmin';
 
 const UsersList = () => {
     const users = useSelector(getUsersList());
@@ -27,7 +27,7 @@ const UsersList = () => {
                     <tbody>
                         {usersWOAdmin.map((u, index) => (
                             <tr key={u._id}>
-                                <UserTable user={u} index={index} />
+                                <UserTableAdmin user={u} index={index} />
                             </tr>
                         ))}
                     </tbody>

@@ -10,16 +10,17 @@ const HeaderNavigation = ({categories}) => {
             return ' text-accent text-xl';
         return '';
     };
+    console.log('categories', categories);
 
     return (
-        <footer className='bg-neutral-content/25 flex flex-nowrap justify-around px-24 py-2 font-bold italic'>
+        <footer className='flex flex-nowrap justify-evenly bg-neutral-content/25 py-2 font-bold italic'>
             {categories ? (
                 <>
                     {categories.map((c) => (
                         <Link
                             to={c.path}
                             className={
-                                'link link-hover hover:transition ease-in-out delay-50 hover:scale-105 hover:duration-300 hover:text-accent' +
+                                'link link-hover hover:transition ease-in-out delay-50 hover:scale-105 hover:duration-300 hover:text-accent p-1' +
                                 getClasses(c.path)
                             }
                             key={c._id}
