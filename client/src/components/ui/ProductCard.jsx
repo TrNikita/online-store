@@ -36,7 +36,7 @@ const ProductCard = ({products, categories}) => {
         <>
             {products.map((p) => (
                 <div key={p._id} className='overflow-x-auto w-full'>
-                    <table className='table w-full text-center'>
+                    <table className='table w-full text-center flex justify-between flex-nowrap'>
                         <tbody>
                             <tr>
                                 <td className='w-3/5'>
