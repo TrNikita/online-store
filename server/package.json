@@ -1,0 +1,27 @@
+{
+  "name": "online-shop",
+  "version": "1.0.0",
+  "description": "this is online-shop",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node app.js",
+    "serve": "cross-env NODE_ENV=development nodemon app.js"
+  },
+  "author": "Nikita Trokhov <tr_nikita@mail.ru>",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "chalk": "^4.1.2",
+    "config": "^3.3.8",
+    "cors": "^2.8.5",
+    "cyrillic-to-translit-js": "^3.2.1",
+    "express": "^4.18.2",
+    "express-validator": "^6.14.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.7.4"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "nodemon": "^2.0.20"
+  }
+}
