@@ -6,6 +6,8 @@ export function generateAuthError(message) {
             return 'Пользователь с данным email уже существует';
         case 'EMAIL_NOT_FOUND':
             return 'Email не найден';
+        case 'admin password incorrect':
+            return 'Admin password incorrect';
         default:
             return 'Слишком много попыток входа. Попробуйте позже';
     }
