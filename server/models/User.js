@@ -9,7 +9,6 @@ const schema = new Schema(
             unique: true,
         },
         password: {type: String},
-        image: String,
         role: {type: String, default: 'USER'},
     },
     {

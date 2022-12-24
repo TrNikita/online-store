@@ -42,8 +42,6 @@ const LoginForm = () => {
         validate();
     }, [data]);
 
-    console.log('data', data);
-
     const isValid = Object.keys(errors).length === 0;
 
     const handleChange = (target) => {

@@ -10,7 +10,6 @@ const HeaderNavigation = ({categories}) => {
             return ' text-accent text-xl';
         return '';
     };
-    console.log('categories', categories);
 
     return (
         <footer className='flex flex-nowrap justify-evenly bg-neutral-content/25 py-2 font-bold italic'>

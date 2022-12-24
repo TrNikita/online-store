@@ -49,7 +49,7 @@ const NavBar = () => {
                 <HeaderNavigationLoader />
             )}
 
-            {!categories && !products ? <SpinnerLoader /> : null}
+            {(!categories || !products) ? <SpinnerLoader /> : null}
         </>
     );
 };

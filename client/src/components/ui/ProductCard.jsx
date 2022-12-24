@@ -7,12 +7,14 @@ import {
     removeProductFromBasket,
     getBasket,
 } from '../../store/basketsSlice';
+import {getIsLoggedIn} from '../../store/usersSlice';
 
 const ProductCard = ({products, categories}) => {
     const dispatch = useDispatch();
     const windowInnerWidth = document.documentElement.clientWidth;
 
     const basket = useSelector(getBasket());
+    const isLoggedIn = useSelector(getIsLoggedIn());
 
     const handleClickAdd = async (product) => {
         const addedProductToBasket = {products: product._id};
@@ -39,7 +41,13 @@ const ProductCard = ({products, categories}) => {
                     <table className='table w-full text-center flex justify-between flex-nowrap'>
                         <tbody>
                             <tr>
-                                <td className='w-3/5'>
+                                <td
+                                    className={
+                                        windowInnerWidth < 1200
+                                            ? 'w-screen'
+                                            : 'w-3/5'
+                                    }
+                                >
                                     <div className='flex items-center space-x-3 text-start'>
                                         {windowInnerWidth > 750 ? (
                                             <Link to={`/products/${p._id}`}>
@@ -85,7 +93,7 @@ const ProductCard = ({products, categories}) => {
                                         </div>
                                     </div>
                                 </td>
-                                {windowInnerWidth > 1000 ? (
+                                {windowInnerWidth > 1200 ? (
                                     <td className='text-xs break-normal whitespace-pre-wrap w-2/5 m-1 p-1'>
                                         {p.description}
                                     </td>
@@ -129,28 +137,35 @@ const ProductCard = ({products, categories}) => {
                                             -
                                         </button>
                                     ) : null}
-                                    <div className='indicator'>
-                                        <button
-                                            onClick={() => handleClickAdd(p)}
-                                            className={
-                                                (!isProductInBasket(p)
-                                                    ? 'btn btn-primary'
-                                                    : 'btn btn-secondary') +
-                                                (windowInnerWidth > 750
-                                                    ? ' btn-wide'
-                                                    : null)
-                                            }
-                                        >
-                                            {!isProductInBasket(p)
-                                                ? 'В корзину'
-                                                : 'Добавить'}
-                                            {isProductInBasket(p) ? (
-                                                <span className='badge indicator-item'>
-                                                    {productsInBasketCount(p)}
-                                                </span>
-                                            ) : null}
-                                        </button>
-                                    </div>
+
+                                    {isLoggedIn ? (
+                                        <div className='indicator'>
+                                            <button
+                                                onClick={() =>
+                                                    handleClickAdd(p)
+                                                }
+                                                className={
+                                                    (!isProductInBasket(p)
+                                                        ? 'btn btn-primary'
+                                                        : 'btn btn-secondary') +
+                                                    (windowInnerWidth > 750
+                                                        ? ' btn-wide'
+                                                        : null)
+                                                }
+                                            >
+                                                {!isProductInBasket(p)
+                                                    ? 'В корзину'
+                                                    : 'Добавить'}
+                                                {isProductInBasket(p) ? (
+                                                    <span className='badge indicator-item'>
+                                                        {productsInBasketCount(
+                                                            p,
+                                                        )}
+                                                    </span>
+                                                ) : null}
+                                            </button>
+                                        </div>
+                                    ) : null}
                                 </th>
                             </tr>
                         </tbody>

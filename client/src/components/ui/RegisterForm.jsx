@@ -85,7 +85,6 @@ const RegisterForm = () => {
         const isValid = validate();
         if (!isValid) return;
         if (params.admin) data.role = 'ADMIN';
-        console.log('data', data);
         dispatch(signUp(data));
     };
 
