@@ -11,14 +11,14 @@ const AppLoader = ({children}) => {
     const isLoggedIn = useSelector(getIsLoggedIn());
 
     useEffect(() => {
-        dispatch(loadUsersList());
-        dispatch(loadBasket());
-    }, [isLoggedIn]);
-
-    useEffect(() => {
         dispatch(loadProductsList());
         dispatch(loadCategoriesList());
     }, []);
+
+    useEffect(() => {
+        dispatch(loadUsersList());
+        dispatch(loadBasket());
+    }, [isLoggedIn]);
 
     return children;
 };

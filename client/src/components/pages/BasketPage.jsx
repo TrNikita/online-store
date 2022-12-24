@@ -5,9 +5,9 @@ import {
     getBasket,
     removeProductFromBasket,
 } from '../../store/basketsSlice';
-// eslint-disable-next-line no-unused-vars
 import {totalPrice} from '../../utils/totalPrice';
 import {getProducts} from '../../store/productsSlice';
+import SpinnerLoader from '../ui/Loaders/SpinnerLoader';
 
 const BasketPage = () => {
     const dispatch = useDispatch();
@@ -15,12 +15,10 @@ const BasketPage = () => {
     const basket = useSelector(getBasket());
     const products = useSelector(getProducts());
 
-    // eslint-disable-next-line no-unused-vars
     const handleClickAdd = async (product) => {
         const addedProductToBasket = {products: product};
         dispatch(addProductToBasket(addedProductToBasket));
     };
-    // eslint-disable-next-line no-unused-vars
     const handleClickRemove = async (product) => {
         const removedProductFromBasket = {products: product};
         dispatch(removeProductFromBasket(removedProductFromBasket));
@@ -35,7 +33,7 @@ const BasketPage = () => {
         return productsInBasket.length;
     }
 
-    if (!products || !basket) return 'Loading';
+    if (!products || !basket) return <SpinnerLoader />;
 
     const uniqueProdInBasket = [...new Set(basket)];
 
